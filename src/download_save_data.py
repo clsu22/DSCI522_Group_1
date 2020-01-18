@@ -15,7 +15,7 @@ opt = docopt(__doc__)
 
 def main(url, path):
   data = pd.read_csv(url)
-  data.to_csv(path)
+  data.to_csv(path, header=False, index=False)
 
 
 if __name__ == '__main__':
