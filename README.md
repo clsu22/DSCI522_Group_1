@@ -55,7 +55,7 @@ We will use the following steps to produce a systematic data analysis:
 
 We explored the rate of breast cancer recurrence and included the results in the following table. Only around 28.6% of the patients had breast cancer recurrence events, while 71.4% of them don't have any recurrence events. So the train data set is not well balanced, we should keep this in mind during model selection.
 
-<img src="./img/rate_table.png" width="400"/>
+<img src="./img/rate_table.png" width="500"/>
 
 To understand the relation between breast cancer recurrence events and age, we made a plot to show the age distribution of patients with or without breast cancer recurrence. Based on the plots, most of the patients in the train data set are between the ages of 30 and 69. Patients at ages 30-39 are more likely to have breast cancer recurrence than other age groups.
 
