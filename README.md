@@ -65,6 +65,10 @@ To study the relation between breast cancer recurrence events and the average tu
 
 ![](./img/tumor_size_dist.png)
 
+**The working EDA file which contains all EDA tables and figures can be found inside the src folder [here](https://github.com/UBC-MDS/DSCI_522_Group_301/blob/master/src/EDA.ipynb).**
+
+ 
+
 ## Share the Results
 
 We will report the weights for each predictor and the top three strongest predictors in a final report document. We decided to share the results with a table and a bar graph. In the table, we will include a column of the predictor names, sorted by weights, and a column of the corresponding weight of the predictor in the model. We will also visualize this table with a bar graph, with the predictor names on the y-axis and weight values on the x-axis. Based on the table and the plot, we can pick out the top three strongest predictors.
