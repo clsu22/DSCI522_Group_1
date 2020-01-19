@@ -1,4 +1,4 @@
-# DSCI_522_Group_1
+# DSCI_522_Group_301
 
 Group Members: 
 Haoyu(Clara) Su, Fanli Zhou, Ke Xin(Margaret) Zhao
