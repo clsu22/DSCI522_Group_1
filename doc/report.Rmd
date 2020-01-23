@@ -1,0 +1,56 @@
+---
+title: "Predicting breast cancer recurrence from breast cancer features"
+output: 
+  github_document:
+    toc: true
+bibliography: breast_cancer_refs.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(knitr)
+library(tidyverse)
+```
+
+# Summary
+
+# Introduction
+
+
+
+# Methods
+
+The Python programming language [], R programming language [@R] and the following Python/R packages were used: pandas [], numpy [], altair [], sklearn [], knitr [@knitr] and tidyverse [@tidyverse]. The code used to perform the analysis can be found here:. The code used to create this report can be found here:.
+
+
+## Data
+
+The breast cancer data set  wes obtained from the [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/Breast+Cancer).  The data set looks at the recurrence and non-recurrence of breast cancer based on 9 features, including groups of age, menopause time, tumor size, ranges of the number of axillary lymph nodes, presence of node in cap, degree of malignancy, breast type, breast quadrant, and whether the patient used radiation therapy. The data set contains 286 instances with missing values. 
+
+## Analysis
+
+
+# Results and Discussion
+
+```{r choosing-k, echo=FALSE, fig.cap="Figure 1", out.width = '40%'}
+
+knitr::include_graphics("")
+
+```
+
+
+
+
+```{r choosing-k, echo=FALSE, fig.cap="Figure 2", out.width = '40%'}
+
+knitr::include_graphics("")
+
+```
+
+
+
+
+
+
+
+# References
