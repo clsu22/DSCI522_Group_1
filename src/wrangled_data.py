@@ -47,8 +47,8 @@ def main(input, output):
     df.to_csv(r"./data/%s" % (output), index=False)
 
 
-    if __name__ == "__main__":
-        main(input=opt["--input"], output=opt["--output"])
+if __name__ == "__main__":
+    main(input=opt["--input"], output=opt["--output"])
 
 
 
