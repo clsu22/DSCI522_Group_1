@@ -14,7 +14,11 @@ from docopt import docopt
 opt = docopt(__doc__)
 
 def main(url, path):
+
+  # read data
   data = pd.read_csv(url)
+
+  # save data
   data.to_csv(path, header=False, index=False)
 
 
