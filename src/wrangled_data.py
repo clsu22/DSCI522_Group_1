@@ -37,13 +37,24 @@ def main(input, output):
     df["avg_tumor_size"] = tumor_size_avg_lst
     df = df.drop(columns = ["tumor_size"])
     
+    # change inv_node from categorical variable to numerical values by taking the average 
+    inv_nodes_str_lst = [i.split('-', 1) for i in list(df["inv_nodes"])]
+    inv_nodes_int_lst = []
+    inv_nodes_avg_lst = []
+    for i in range(len(inv_nodes_str_lst)):
+        inv_nodes_int_lst.append([int(j) for j in inv_nodes_str_lst[i]])
+    for i in range(len(inv_nodes_int_lst)):
+        inv_nodes_avg_lst.append(sum(inv_nodes_int_lst[i])/len(inv_nodes_int_lst[i]))
+    df["avg_inv_nodes"] = inv_nodes_avg_lst
+    df = df.drop(columns = ["inv_nodes"])
+    
     # Drop missing values
     df = df.dropna()
     
     # Change target to 0 and 1
     df['Class'] = df['Class'].replace({'no-recurrence-events': 0, 'recurrence-events': 1})
     
-    # Save wrangled data to file
+    # Save wrangle data to file
     df.to_csv(r"./data/%s" % (output), index=False)
 
 
