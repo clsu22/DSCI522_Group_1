@@ -11,7 +11,7 @@ Our Breast Cancer Data Set is obtained from [UCI Machine Learning Repository](ht
 
 **Main predictive research question:**
 
-What are the top three strongest predictors of breast cancer recurrence? 
+What are the strongest predictors of breast cancer recurrence? 
 
 **Natural sub-questions:**
 
@@ -39,9 +39,9 @@ We will use the following steps to produce a systematic data analysis:
 
 5) Select different classifiers include decision tree, logistic regression, KNN, SVC, and random forest. 
 
-6) Hyperparameter optimization using cross-validation.
+6) Hyperparameter optimization using 5-fold cross-validation.
 
-7) Find the best model using the test set, and summarize the weights. 
+7) Find the best model based on scores, summarize the weights, and use the model to make predictions on the  test set. 
 
 
 ## Discussion of EDA Table & Figure

@@ -1,5 +1,7 @@
 ---
-title: "Predicting breast cancer recurrence from breast cancer features"
+title: "Identifying strong predictors of breast cancer recurrence"
+author: "Fanli Zhou"
+date: "2020/1/23 (updated: `r Sys.Date()`)"
 output: 
   github_document:
     toc: true
@@ -14,40 +16,42 @@ library(tidyverse)
 
 # Summary
 
+We use a   model to find out the top three strongest features to predict breast cancer recurrence. 
+
 # Introduction
 
+Breast cancer is a type of cancer that develops in the breast. With hundreds of thousand women are estimated to be diagnosed with breast cancer in 2019 alone, breast cancer is the second common cancer found in women [@cancer1]. Breast cancer may come back after the initial treatment, known as breast cancer recurrence [@cancer2]. Based on a medical study in 2010, breast cancer has a high recurrence rate of around 40% [@cancer3]. Although the cause of breast cancer is not clear, some factors such as age and the tumor size are known to affect the recurrence risk [@cancer2].
 
+In this project, we attempt to answer the question: What are the strongest predictors of breast cancer recurrence? Answering this question will help identify patients who have high breast cancer recurrence risk. Once we can identify patients with high recurrence risk, we can give patients corresponding treatments to help prevent recurrence. Besides, finding out factors related to breast cancer recurrence may shed light on understanding the cause of breast cancer recurrence. Thus, it's important to identify strong predictors of breast cancer recurrence.
 
 # Methods
 
-The Python programming language [], R programming language [@R] and the following Python/R packages were used: pandas [], numpy [], altair [], sklearn [], knitr [@knitr] and tidyverse [@tidyverse]. The code used to perform the analysis can be found here:. The code used to create this report can be found here:.
-
-
 ## Data
 
-The breast cancer data set  wes obtained from the [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/Breast+Cancer).  The data set looks at the recurrence and non-recurrence of breast cancer based on 9 features, including groups of age, menopause time, tumor size, ranges of the number of axillary lymph nodes, presence of node in cap, degree of malignancy, breast type, breast quadrant, and whether the patient used radiation therapy. The data set contains 286 instances with missing values. 
+The breast cancer data set was obtained from the UCI Machine Learning Repository [@Dua2019] and can be found [here](https://archive.ics.uci.edu/ml/datasets/Breast+Cancer). The data set looks at the recurrence and non-recurrence of breast cancer based on 9 features, including groups of age, menopause time, tumor size, ranges of the number of axillary lymph nodes, presence of node in cap, degree of malignancy, breast type, breast quadrant, and whether the patient used radiation therapy. The data set contains 286 instances with missing values. 
 
 ## Analysis
+
+The logistic regression algorithm was used to build a classification model to find out the weights of each feature in the data set. All variables in the original data set were used to fit the model. The hyperparameter     was chosen with 5-fold cross-validation with    as the scoring method. The Python programming language [@Python], R programming language [@R] and the following Python/R packages were used: Pandas [@mckinney-proc-scipy-2010], NumPy [@oliphant2006guide, @walt2011numpy], Altair [@Altair2018], scikit-learn [pedregosa2011scikit], knitr [@knitr] and tidyverse [@tidyverse]. The code used to perform the analysis can be found here: . The code used to create this report can be found here: .
 
 
 # Results and Discussion
 
-```{r choosing-k, echo=FALSE, fig.cap="Figure 1", out.width = '40%'}
+Before exploring any features, We first analyzed the rate of breast cancer recurrence in the data set. Only around 28.6% of the patients had breast cancer recurrence events, while 71.4% of them don't have any recurrence events. So the train data set is not well balanced, and we decided to address this question by scoring our model with metrics such as the recall score.
 
-knitr::include_graphics("")
+Some factors such as "younger age, particularly those under age 35" and "larger tumor size" are known to increase the risk of breast cancer recurrence [@cancer2]. To explore the data set, we would like to first look at how breast cancer recurrence is related to age and tumor size.
 
-```
+To understand the relation between breast cancer recurrence events and age, we made a plot to show the age distribution of patients with or without breast cancer recurrence. Based on the plots, most of the patients in the train data set are between the ages of 30 and 69. Patients at ages 30-39 are more likely to have breast cancer recurrence than other age groups.
 
-
-
-
-```{r choosing-k, echo=FALSE, fig.cap="Figure 2", out.width = '40%'}
-
-knitr::include_graphics("")
-
-```
+To study the relation between breast cancer recurrence events and the average tumor size, we visualized the average tumor size distribution of patients with or without breast cancer recurrence. From the plot, we see that the mean of the average tumor size of patients with breast cancer recurrence is bigger than those without breast cancer recurrence. So "larger tumor size" is related to breast cancer recurrence events.
 
 
+
+Known that the data set reflects the relation between breast cancer recurrence and age or the tumor size, we then started to look for features that are good at predicting breast cancer recurrence. We decided to train a simple logistic regression model to calculate weights for each feature in the data set. We used 5-fold cross-validation to ... 
+
+The feature...
+
+Our model works well on the test data set...
 
 
 
