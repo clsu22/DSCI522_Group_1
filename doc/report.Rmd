@@ -2,8 +2,9 @@
 title: "Identifying strong predictors of breast cancer recurrence"
 author: "Fanli Zhou"
 date: "2020/1/23 (updated: `r Sys.Date()`)"
+always_allow_html: true
 output: 
-  github_document:
+  html_document:
     toc: true
 bibliography: breast_cancer_refs.bib
 ---
