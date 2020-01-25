@@ -3,6 +3,19 @@
 
 Group Members: Haoyu(Clara) Su, Fanli Zhou, Ke Xin(Margaret) Zhao
 
+We explored to use a logistic regression model to identify strong
+predictors of breast cancer recurrence. Based on the feature weights
+assigned in the model, we found that the degree of malignancy is a very
+strong predictor of breast cancer recurrence. The other two predictors,
+such as being in the age 60-69 group and having cancer in the right-up
+of the breast quadrants, are also among the top five features with the
+highest absolute weight values. Our model didn’t perform well on unseen
+data, with a fair accuracy score of 0.73 and a low recall score of 0.25.
+The low recall score is likely due to data imbalance in the whole data
+set. If time permits, we would like to explore some advanced methods to
+handle the imbalanced data situation and try some advanced feature
+selection methods to build a better model.
+
 The breast cancer data set was obtained from the UCI Machine Learning
 Repository (Dua and Graff 2017) and can be found
 [here](https://archive.ics.uci.edu/ml/datasets/Breast+Cancer). The data
@@ -15,7 +28,8 @@ values.
 
 ## Report
 
-The final report can be found [here]()
+The final report can be found
+[here](https://github.com/UBC-MDS/DSCI_522_Group_301/doc/report.html)
 
 ## Usage
 
@@ -26,9 +40,12 @@ The final report can be found [here]()
       - numpy==1.17.2
       - altair==3.3.0
       - sklearn==0.22
+      - docopt==0.6.2
   - R 3.6.1 and R packages:
       - knitr==1.27.2
       - tidyverse==1.3.0
+      - ggridges==0.5.1
+      - cowplot==1.0.0
 
 # References
 
