@@ -70,7 +70,7 @@ def main(input, output):
     # perform grid-search and cross-validation to find the best hyperparameter. 
     param_grid = {'C': [0.00001, 0.0001, 0.001, 0.01, 0.1, 1, 10, 100]}
     lgr = LogisticRegression(solver = 'liblinear')
-    model = GridSearchCV(lgr, param_grid, cv=5)
+    model = GridSearchCV(lgr, param_grid, cv=5, scoring='recall')
     model.fit(X_train, y_train.to_numpy().ravel());
     print("best hyperparameter value: ", model.best_params_)
     pd.DataFrame({'parameter': ['C'],
@@ -111,11 +111,11 @@ def main(input, output):
     d = {'features' : list(X_train.columns),
          'weights': best.coef_.tolist()[0],
          'abs(weights)': abs(best.coef_).tolist()[0]}
-    df_features = pd.DataFrame(d).sort_values(by = 'abs(weights)', ascending = False).reset_index(drop = True)
-    df_features.to_csv(f'./{output}/features_and_weights.csv', index=False)
+    features_df = pd.DataFrame(d).sort_values(by = 'abs(weights)', ascending = False).reset_index(drop = True)
+    features_df.to_csv(f'./{output}/features_and_weights.csv', index=False)
 
     # plot the top four strongest predictors
-    feature_plot = df_features.iloc[:4].plot("features", "abs(weights)")
+    feature_plot = features_df.iloc[:4].plot("features", "abs(weights)")
     #feature_plot.savefig(f'./{output}/feature_plot.png')
     
 if __name__ == "__main__":
