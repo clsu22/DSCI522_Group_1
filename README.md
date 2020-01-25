@@ -33,27 +33,21 @@ The final report can be found
 
 ## Usage
 
-To replicate the analysis, clone this GitHub repository, install the dependencies listed below, and run the following commands at the command line/terminal from the root directory of this project:
+To replicate the analysis, clone this GitHub repository, install the
+dependencies listed below, and run the following commands at the command
+line/terminal from the root directory of this project:
 
-```
-# download data
- 
- ```     
+    # download data
+    python3 src/download_save_data.py --url="https://archive.ics.uci.edu/ml/machine-learning-databases/breast-cancer/breast-cancer.data" --output="data/raw_data/breast_cancer_raw.csv" 
 
- ```
- # pre-processing/clean data
-python3 src/wrangled_data.py --input="raw_data/breast_cancer_raw.csv" --output="clean_data/breast_cancer_clean.csv"
- ```
+    # pre-processing/clean data
+    python3 src/wrangled_data.py --input="raw_data/breast_cancer_raw.csv" --output="clean_data/breast_cancer_clean.csv"
 
- ```
- # create EDA figures/tables
- Rscript src/visualization.R --train=  --out_dir = results
- ```
+    # create EDA figures/tables
+    Rscript src/visualization.R --train=  --out_dir = results
 
- ```
- # data analysis
-python3 src/analysis.py --input="clean_data/breast_cancer_clean.csv" --output="results"
- ```
+    # data analysis
+    python3 src/analysis.py --input="clean_data/breast_cancer_clean.csv" --output="results"
 
 ## Dependencies
 
@@ -77,7 +71,10 @@ python3 src/analysis.py --input="clean_data/breast_cancer_clean.csv" --output="r
 
 Dua, Dheeru, and Casey Graff. 2017. “UCI Machine Learning Repository.”
 University of California, Irvine, School of Information; Computer
-Sciences. <http://archive.ics.uci.edu/ml>.
+Sciences. This breast cancer domain was obtained from the University
+Medical Centre, Institute of Oncology, Ljubljana, Yugoslavia. Thanks go
+to M. Zwitter; M. Soklic for providing the data.
+<http://archive.ics.uci.edu/ml>.
 
 </div>
 
