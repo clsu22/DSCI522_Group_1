@@ -105,13 +105,14 @@ def main(input, output):
     plt.rc('xtick', labelsize=16)    
     plt.rc('ytick', labelsize=16)    
     plt.rc('figure', titlesize=18)
-    
+
     fpr, tpr, thresholds = roc_curve(y_test, model.predict_proba(X_test)[:,1])
     plt.plot(fpr, tpr);
     plt.title('ROC report')
     plt.plot((0,1),(0,1),'--k');
     plt.xlabel('False positive rate');
     plt.ylabel('True positive rate');
+    plt.tight_layout()
     plt.savefig(f'./{output}/roc_report.png')
     
     # training with the best hyperparameter
