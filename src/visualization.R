@@ -4,16 +4,17 @@
 "Creates eda plots for the pre-processed training data from the credit approval data.
 Saves the plots as png files.
 
-Usage: src/visualizations.R --train=<train> --out_dir=<out_dir>
+Usage: src/visualization.R --train=<train> --out_dir=<out_dir>
 
 Options:
 --train=<train>      Path (including filename) to training data (which needs to be saved as a csv file).
---out_dir=<out_dir> Path to directory where the figures will be saved.
+--out_dir=<out_dir>  Path to directory where the figures will be saved.
 " -> doc
 
 library(tidyverse)
 library(cowplot)
 library(ggridges) 
+library(docopt)
 
 opt <- docopt(doc)
 
@@ -47,11 +48,13 @@ main <- function(train, out_dir) {
   
   # Plot class against avg_tumor_size
   p2 <- data_df %>% 
-    ggplot(aes(y = Class, x = avg_tumor_size)) +
+    ggplot(aes(y = Class, x = avg_tumor_size, vline_color = ..quantile..)) +
     geom_density_ridges(alpha = 0.6, scale = 1, quantile_lines = TRUE) + 
-    labs(title = "Recurrence vs. Average tumor size", 
-         y = "Class", 
-         x = "Average tumor size") +
+    scale_discrete_manual("vline_color",
+                          values = c("blue", "red", "blue", "black"), 
+                          breaks = c(1, 2),
+                          labels = c("1st & 3rd quartile", "median"),
+                          name = NULL) +
     xlim(0,  55) +
     theme(axis.text = element_text(size = 14),
           text = element_text(size = 16),

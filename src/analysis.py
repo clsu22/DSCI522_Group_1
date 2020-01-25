@@ -80,16 +80,22 @@ def main(input, output):
     # Measure accuracy scores with different metrics
     predict_train = model.predict(X_train)
     train_accuracy = accuracy_score(y_train, predict_train)
+    train_recall = recall_score(y_train, predict_train)
+    train_precision = precision_score(y_train, predict_train)
+    train_f1 = f1_score(y_train, predict_train)
+    train_auc_score = roc_auc_score(y_train, model.predict_proba(X_train)[:, 1])
     predict_test = model.predict(X_test)
     test_accuracy = accuracy_score(y_test, predict_test)
     test_recall = recall_score(y_test, predict_test)
     test_precision = precision_score(y_test, predict_test)
     test_f1 = f1_score(y_test, predict_test)
-    auc_score = roc_auc_score(y_test, model.predict_proba(X_test)[:, 1])
-    scores_df = pd.DataFrame({'metrics': ['train accuracy', 'test accuracy', 'test recall', 
-                                          'test precision', 'test f1 score', 'auc score'],
-                              'score': [train_accuracy, test_accuracy, test_recall, 
-                                        test_precision, test_f1, auc_score]})
+    test_auc_score = roc_auc_score(y_test, model.predict_proba(X_test)[:, 1])
+    scores_df = pd.DataFrame({'dataset': ['train', 'test'],
+                              'accuracy': [train_accuracy, test_accuracy],
+                              'recall': [train_recall, test_recall], 
+                              'precision': [train_precision, test_precision], 
+                              'f1 score': [train_f1, test_f1], 
+                              'auc score': [train_auc_score, test_auc_score]})
 
     scores_df.to_csv(f'./{output}/scores.csv', index=False)
     
