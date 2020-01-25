@@ -22,7 +22,7 @@ main <- function(train, out_dir) {
   # load data
   theme_set(theme_cowplot())
   
-  options(repr.plot.height = 8, repr.plot.width = 15)
+  options(repr.plot.height = 8, repr.plot.width = 16)
 
   df <- read_csv(train)
 
@@ -55,6 +55,9 @@ main <- function(train, out_dir) {
                           breaks = c(1, 2),
                           labels = c("1st & 3rd quartile", "median"),
                           name = NULL) +
+    labs(title = "Recurrence vs. Average tumor size", 
+         y = "Class", 
+         x = "Average tumor size") +
     xlim(0,  55) +
     theme(axis.text = element_text(size = 14),
           text = element_text(size = 16),
@@ -64,7 +67,7 @@ main <- function(train, out_dir) {
 
   # Save figures
   ggsave(plot=plot_grid(p1, p2, labels = c('A', 'B'), label_size = 12, ncol = 1),
-         path = out_dir, "data_analysis.png", width = 8, height = 6, dpi = 300)
+         path = out_dir, "data_analysis.png", width = 10, height = 6, dpi = 300)
 }
 
 main(opt[["--train"]], opt[["--out_dir"]])
