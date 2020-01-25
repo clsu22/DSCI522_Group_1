@@ -238,7 +238,10 @@ Language*. <https://CRAN.R-project.org/package=docopt>.
 
 Dua, Dheeru, and Casey Graff. 2017. “UCI Machine Learning Repository.”
 University of California, Irvine, School of Information; Computer
-Sciences. <http://archive.ics.uci.edu/ml>.
+Sciences. This breast cancer domain was obtained from the University
+Medical Centre, Institute of Oncology, Ljubljana, Yugoslavia. Thanks go
+to M. Zwitter; M. Soklic for providing the data.
+<http://archive.ics.uci.edu/ml>.
 
 </div>
 
