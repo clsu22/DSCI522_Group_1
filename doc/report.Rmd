@@ -5,6 +5,7 @@ date: "2020/1/23 (updated: `r Sys.Date()`)"
 always_allow_html: true
 output: 
   html_document:
+#  github_document:
     toc: true
 bibliography: breast_cancer_refs.bib
 ---

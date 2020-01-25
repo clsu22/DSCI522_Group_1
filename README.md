@@ -29,7 +29,7 @@ values.
 ## Report
 
 The final report can be found
-[here](https://github.com/UBC-MDS/DSCI_522_Group_301/doc/report.html)
+[here](https://github.com/UBC-MDS/DSCI_522_Group_301/blob/master/doc/report.md)
 
 ## Usage
 

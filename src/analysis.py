@@ -100,12 +100,19 @@ def main(input, output):
     scores_df.to_csv(f'./{output}/scores.csv', index=False)
     
     # roc curve 
+    plt.rc('font', size=18)          
+    plt.rc('axes', titlesize=16, labelsize=16)    
+    plt.rc('xtick', labelsize=16)    
+    plt.rc('ytick', labelsize=16)    
+    plt.rc('figure', titlesize=18)
+
     fpr, tpr, thresholds = roc_curve(y_test, model.predict_proba(X_test)[:,1])
     plt.plot(fpr, tpr);
     plt.title('ROC report')
     plt.plot((0,1),(0,1),'--k');
-    plt.xlabel('false positive rate');
-    plt.ylabel('true positive rate');
+    plt.xlabel('False positive rate');
+    plt.ylabel('True positive rate');
+    plt.tight_layout()
     plt.savefig(f'./{output}/roc_report.png')
     
     # training with the best hyperparameter
