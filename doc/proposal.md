@@ -41,22 +41,22 @@ We will use the following steps to produce a systematic data analysis:
 
 6) Hyperparameter optimization using 5-fold cross-validation.
 
-7) Find the best model based on scores, summarize the weights, and use the model to make predictions on the  test set. 
+7) Find the best model based on scores, summarize the weights, and use the model to make predictions on the test set. 
 
 
 ## Discussion of EDA Table & Figure
 
 We explored the rate of breast cancer recurrence and included the results in the following table. Only around 28.6% of the patients had breast cancer recurrence events, while 71.4% of them don't have any recurrence events. So the train data set is not well balanced, we should keep this in mind during model selection.
 
-<img src="../img/rate_table.png" width="400"/>
+<img src="../results/rate_table.png" width="400"/>
 
 To understand the relation between breast cancer recurrence events and age, we made a plot to show the age distribution of patients with or without breast cancer recurrence. Based on the plots, most of the patients in the train data set are between the ages of 30 and 69. Patients at ages 30-39 are more likely to have breast cancer recurrence than other age groups.
 
-![](../img/age_dist.png)
+![](../results/age_dist.png)
 
 To study the relation between breast cancer recurrence events and the average tumor size, we visualized the average tumor size distribution of patients with or without breast cancer recurrence. From the plot, we see that the mean of the average tumor size of patients with breast cancer recurrence is bigger than those without breast cancer recurrence. 
 
-![](../img/tumor_size_dist.png)
+![](../results/tumor_size_dist.png)
 
 ## Share the Results
 
