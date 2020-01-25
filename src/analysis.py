@@ -73,7 +73,10 @@ def main(input, output):
     model = GridSearchCV(lgr, param_grid, cv=5)
     model.fit(X_train, y_train.to_numpy().ravel());
     print("best hyperparameter value: ", model.best_params_)
-    
+    pd.DataFrame({'parameter': ['C'],
+                  'value': [model.best_params_['C']]
+                  }).to_csv(f'./{output}/model_info.csv', index=False)
+
     # Measure accuracy scores with different metrics
     predict_train = model.predict(X_train)
     train_accuracy = accuracy_score(y_train, predict_train)
@@ -83,12 +86,12 @@ def main(input, output):
     test_precision = precision_score(y_test, predict_test)
     test_f1 = f1_score(y_test, predict_test)
     auc_score = roc_auc_score(y_test, model.predict_proba(X_test)[:, 1])
-    scores_df = pd.DataFrame(index = ['train accuracy', 'test accuracy', 'test recall', 
-                                    'test precision', 'test f1 score', 'auc score'], 
-                             data = {
-                'score': [train_accuracy, test_accuracy, test_recall, test_precision, test_f1, auc_score]
-    })
-    scores_df.to_csv(f'./{output}/scores.csv')
+    scores_df = pd.DataFrame({'metrics': ['train accuracy', 'test accuracy', 'test recall', 
+                                          'test precision', 'test f1 score', 'auc score'],
+                              'score': [train_accuracy, test_accuracy, test_recall, 
+                                        test_precision, test_f1, auc_score]})
+
+    scores_df.to_csv(f'./{output}/scores.csv', index=False)
     
     # roc curve 
     fpr, tpr, thresholds = roc_curve(y_test, model.predict_proba(X_test)[:,1])
@@ -109,7 +112,7 @@ def main(input, output):
          'weights': best.coef_.tolist()[0],
          'abs(weights)': abs(best.coef_).tolist()[0]}
     df_features = pd.DataFrame(d).sort_values(by = 'abs(weights)', ascending = False).reset_index(drop = True)
-    df_features.to_csv(f'./{output}/features_and_weights.csv')
+    df_features.to_csv(f'./{output}/features_and_weights.csv', index=False)
 
     # plot the top four strongest predictors
     feature_plot = df_features.iloc[:4].plot("features", "abs(weights)")
