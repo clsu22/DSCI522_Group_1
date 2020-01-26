@@ -13,6 +13,7 @@ Options:
 import pandas as pd
 import numpy as np
 from docopt import docopt
+from sklearn.model_selection import train_test_split
 
 opt = docopt(__doc__)
 
@@ -56,6 +57,25 @@ def main(input, output):
     
     # Save wrangle data to file
     df.to_csv(r"./data/%s" % (output), index=False)
+    
+    # split training and test data set
+    X = df.drop(columns=['Class'])
+    y = df[['Class']]
+
+    X_train, X_test, y_train, y_test = train_test_split(X,
+                                                        y,
+                                                        test_size=0.2,
+                                                        random_state=888)
+
+    breast_cancer_train = X_train
+    breast_cancer_train = pd.merge(breast_cancer_train, y_train, left_index=True, right_index=True)
+
+    breast_cancer_test = X_test
+    breast_cancer_test = pd.merge(breast_cancer_test, y_test, left_index=True, right_index=True)
+
+    # Save train data and test data to file
+    #breast_cancer_train.to_csv(r"./data/{output}/breast_cancer_train.csv', index=False)
+    #breast_cancer_test.to_csv(r"./data/{output}/breast_cancer_test.csv', index=False)
 
 
 if __name__ == "__main__":
