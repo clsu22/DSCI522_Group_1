@@ -1,7 +1,7 @@
 Identifying strong predictors of breast cancer recurrence
 ================
 Fanli Zhou
-2020/1/23 (updated: 2020-01-24)
+2020/1/23 (updated: 2020-01-25)
 
   - [Summary](#summary)
   - [Introduction](#introduction)
@@ -15,16 +15,16 @@ Fanli Zhou
 
 We explored to use a logistic regression model to identify strong
 predictors of breast cancer recurrence. Based on the feature weights
-assigned in the model, we found that the degree of malignancy is a very
-strong predictor of breast cancer recurrence. The other two predictors,
-such as being in the age 60-69 group and having cancer in the right-up
+assigned in the model, we found that degrees of malignancy are very
+strong predictors of breast cancer recurrence. The other two predictors,
+including being in the age 60-69 group and having cancer in the right-up
 of the breast quadrants, are also among the top five features with the
 highest absolute weight values. Our model didn’t perform well on unseen
 data, with a fair accuracy score of 0.73 and a low recall score of 0.25.
-The low recall score is likely due to data imbalance in the whole data
-set. If time permits, we would like to explore some advanced methods to
-handle the imbalanced data situation and try some advanced feature
-selection methods to build a better model.
+The low recall score is likely due to the data imbalance problem noticed
+in the training data set. If time permits, we would like to explore some
+advanced methods to handle the imbalanced data situation and try some
+advanced feature selection methods to build a better model.
 
 # Introduction
 
@@ -34,19 +34,19 @@ cancer in 2019 alone, breast cancer is the second most common cancer
 found in women (Cancer.Net 2019). Breast cancer may come back after the
 initial treatment, known as breast cancer recurrence (Staff 2018). Based
 on a medical study in 2010, breast cancer has a high recurrence rate of
-around 40% (Halls 2019). Although the cause of breast cancer is not
-clear, some factors such as age and the tumor size are known to affect
-the recurrence risk (Staff 2018).
+around 40% (Halls 2019). Although the cause of breast cancer recurrence
+is not clear, some factors such as age and the tumor size are known to
+affect the recurrence risk (Staff 2018).
 
 In this project, we attempt to answer the question: What are the
 strongest predictors of breast cancer recurrence? Answering this
-question will help identify patients who have high breast cancer
-recurrence risk. Once we can identify patients with high recurrence
-risk, we can give patients corresponding treatments to help prevent
-recurrence events. Besides, finding out factors related to breast cancer
-recurrence may shed light on understanding the cause of breast cancer
-recurrence. Thus, it’s important to identify strong predictors of breast
-cancer recurrence.
+question will help identify patients who have high risk of breast cancer
+recurrence. Once we can identify patients with high recurrence risk, we
+can give patients corresponding treatments to help prevent recurrence
+events. Besides, finding out factors related to breast cancer recurrence
+may shed light on understanding the cause of breast cancer recurrence.
+Thus, it’s important to identify strong predictors of breast cancer
+recurrence.
 
 # Methods
 
@@ -70,29 +70,31 @@ variables in the original data set were used to fit the model. Features,
 including the tumor size and ranges of the number of axillary lymph
 nodes, were converted to the average number and used as numeric
 variables, while other features were treated as categorical variables.
-The hyperparameter `C` was chosen with 5-fold cross-validation based on
-the recall score. The Python programming language (Van Rossum and Drake
-2009), R programming language (R Core Team 2019) and the following
-Python/R packages were used: Pandas (McKinney 2010), NumPy (Oliphant
-2006, 1:@walt2011numpy), Altair (VanderPlas et al. 2018), scikit-learn
-(Pedregosa et al. 2011), docopt (de Jonge 2018), knitr (Xie 2014),
-tidyverse (Wickham 2017), cowplot (Wilke 2019), ggridges (Wilke 2018).
-The code used to perform the analysis and create this report can be
-found here: <https://github.com/UBC-MDS/DSCI_522_Group_301>.
+The hyperparameter `C` for logistic regression was chosen with 5-fold
+cross-validation based on the recall score. The Python programming
+language (Van Rossum and Drake 2009), the R programming language (R Core
+Team 2019) and the following Python/R packages were used: Pandas
+(McKinney 2010), NumPy (Oliphant 2006, 1:@walt2011numpy), Altair
+(VanderPlas et al. 2018), scikit-learn (Pedregosa et al. 2011), docopt
+(de Jonge 2018), knitr (Xie 2014), tidyverse (Wickham 2017), cowplot
+(Wilke 2019), ggridges (Wilke 2018). The code used to perform the
+analysis and create this report can be found here:
+<https://github.com/UBC-MDS/DSCI_522_Group_301>.
 
 # Results and Discussion
 
 Before exploring any features, We first analyzed the rate of breast
-cancer recurrence in the training data set. Only around 28.6% of the
-patients had breast cancer recurrence events, while 71.4% of them don’t
+cancer recurrence in the training data set. Only around 29.5% of the
+patients had breast cancer recurrence events, while 70.5% of them don’t
 have any recurrence events. So the training data set is not well
 balanced, and we decided to address this question by scoring our model
 with metrics such as the recall score.
 
 Some factors such as “younger age, particularly those under age 35” and
 “larger tumor size” are known to increase the risk of breast cancer
-recurrence (Staff 2018). To explore the data set, we would like to first
-look at how breast cancer recurrence is related to age and tumor size.
+recurrence (Staff 2018). To explore the training data set, we would like
+to first look at how breast cancer recurrence is related to age and
+tumor size.
 
 To understand the relation between breast cancer recurrence events and
 age, we made a plot to show the age distribution of patients with or
@@ -102,13 +104,13 @@ Patients at ages 30-39 are more likely to have breast cancer recurrence
 than other age groups.
 
 To study the relation between breast cancer recurrence events and the
-tumor size, we first converted a tumor size range to the corresponding
+tumor size, we first converted the tumor size range to the corresponding
 average tumor size and then visualized the average tumor size
 distribution of patients with or without breast cancer recurrence. From
-figure 1B, we see that the median of the average tumor size of patients
-with breast cancer recurrence is bigger than those without breast cancer
-recurrence. So “larger tumor size” is related to breast cancer
-recurrence events.
+figure 1B, we see that the 0.25 quantile and the mean of the average
+tumor size of patients with breast cancer recurrence are bigger than
+those without breast cancer recurrence. So “larger tumor size” is
+related to breast cancer recurrence events.
 
 <div class="figure">
 
@@ -139,9 +141,9 @@ the breast quadrants. The degree of malignancy is clearly a strong
 predictor of breast cancer recurrence, with a degree of 3 strongly
 (meaning a high absolute weight value) related to “recurrence” and a
 degree of 1 or 2 strongly related to “no recurrence”. The feature, being
-in the age 60-69 group, has a high positive weight, but the overall
-weights trending of different age groups is confusing. Besides, having
-cancer in the right-up of the breast quadrants is another strong
+in the age 60-69 group, has a high positive weight value, but the
+overall trending of weights as age increases is confusing. Besides,
+having cancer in the right-up of the breast quadrants is another strong
 predictor. However, some factors that are known related to breast cancer
 recurrence, including “younger age, particularly those under age 35” and
 “larger tumor size” (Staff 2018), didn’t stand out in this analysis.
@@ -208,7 +210,7 @@ Figure 2. ROC curve of the test data set.
 
 If time permits, we want to improve our model in two ways. First, we
 need to find a better way to handle data imbalance other than just
-changing the scoring method. With an advanced approach to deal with the
+ajusting the scoring method. With an advanced approach to deal with the
 data imbalance problem, we expect to see a big improvement in the
 recall, precision, and f1 scores for both training and test data.
 Second, we want to explore other feature selection methods to help us

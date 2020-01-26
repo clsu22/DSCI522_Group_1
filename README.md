@@ -5,16 +5,16 @@ Group Members: Haoyu(Clara) Su, Fanli Zhou, Ke Xin(Margaret) Zhao
 
 We explored to use a logistic regression model to identify strong
 predictors of breast cancer recurrence. Based on the feature weights
-assigned in the model, we found that the degree of malignancy is a very
-strong predictor of breast cancer recurrence. The other two predictors,
-such as being in the age 60-69 group and having cancer in the right-up
+assigned in the model, we found that degrees of malignancy are very
+strong predictors of breast cancer recurrence. The other two predictors,
+including being in the age 60-69 group and having cancer in the right-up
 of the breast quadrants, are also among the top five features with the
 highest absolute weight values. Our model didn’t perform well on unseen
 data, with a fair accuracy score of 0.73 and a low recall score of 0.25.
-The low recall score is likely due to data imbalance in the whole data
-set. If time permits, we would like to explore some advanced methods to
-handle the imbalanced data situation and try some advanced feature
-selection methods to build a better model.
+The low recall score is likely due to the data imbalance problem noticed
+in the training data set. If time permits, we would like to explore some
+advanced methods to handle the imbalanced data situation and try some
+advanced feature selection methods to build a better model.
 
 The breast cancer data set was obtained from the UCI Machine Learning
 Repository (Dua and Graff 2017) and can be found
@@ -34,20 +34,24 @@ The final report can be found
 ## Usage
 
 To replicate the analysis, clone this GitHub repository, install the
-dependencies listed below, and run the following commands at the command
-line/terminal from the root directory of this project:
+[dependencies](#dependencies) listed below, and run the following
+commands at the command line/terminal from the root directory of this
+project:
 
     # download data
     python3 src/download_save_data.py --url="https://archive.ics.uci.edu/ml/machine-learning-databases/breast-cancer/breast-cancer.data" --output="data/raw_data/breast_cancer_raw.csv" 
-
+    
     # pre-processing/clean data
-    python3 src/wrangled_data.py --input="raw_data/breast_cancer_raw.csv" --output="clean_data"
-
+    python3 src/wrangled_data.py --input="raw_data/breast_cancer_raw.csv" --output="clean_data/breast_cancer_clean.csv"
+    
     # create EDA figures/tables
-    Rscript src/visualization.R --train="data/clean_data/breast_cancer_train.csv" --out_dir="results"
-
+    Rscript src/visualization.R --train=  --out_dir = results
+    
     # data analysis
     python3 src/analysis.py --input="clean_data/breast_cancer_clean.csv" --output="results"
+    
+    # render final report
+    Rscript -e "rmarkdown::render('doc/report.Rmd', output_format = 'github_document')"
 
 ## Dependencies
 
