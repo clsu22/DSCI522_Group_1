@@ -77,6 +77,9 @@ def main(input, output):
     breast_cancer_train.to_csv(f'./data/{output}/breast_cancer_train.csv', index=False)
     breast_cancer_test.to_csv(f'./data/{output}/breast_cancer_test.csv', index=False)
 
+    pd.DataFrame({'class': ['recurrence', 'no-recurrence'],
+                  'value': [breast_cancer_train['Class'].sum(), breast_cancer_train.shape[0] - breast_cancer_train['Class'].sum()]
+                  }).to_csv(f'./results/train_info.csv', index=False)
 
 if __name__ == "__main__":
     main(input=opt["--input"], output=opt["--output"])
