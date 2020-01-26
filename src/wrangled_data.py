@@ -56,7 +56,7 @@ def main(input, output):
     df['Class'] = df['Class'].replace({'no-recurrence-events': 0, 'recurrence-events': 1})
     
     # Save wrangle data to file
-    df.to_csv(r"./data/%s" % (output), index=False)
+    df.to_csv(f'./data/{output}/breast_cancer_clean1.csv', index=False)
     
     # split training and test data set
     X = df.drop(columns=['Class'])
@@ -74,8 +74,8 @@ def main(input, output):
     breast_cancer_test = pd.merge(breast_cancer_test, y_test, left_index=True, right_index=True)
 
     # Save train data and test data to file
-    #breast_cancer_train.to_csv(r"./data/{output}/breast_cancer_train.csv', index=False)
-    #breast_cancer_test.to_csv(r"./data/{output}/breast_cancer_test.csv', index=False)
+    breast_cancer_train.to_csv(f'./data/{output}/breast_cancer_train.csv', index=False)
+    breast_cancer_test.to_csv(f'./data/{output}/breast_cancer_test.csv', index=False)
 
 
 if __name__ == "__main__":

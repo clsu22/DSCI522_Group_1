@@ -41,7 +41,7 @@ line/terminal from the root directory of this project:
     python3 src/download_save_data.py --url="https://archive.ics.uci.edu/ml/machine-learning-databases/breast-cancer/breast-cancer.data" --output="data/raw_data/breast_cancer_raw.csv" 
 
     # pre-processing/clean data
-    python3 src/wrangled_data.py --input="raw_data/breast_cancer_raw.csv" --output="clean_data/breast_cancer_clean.csv"
+    python3 src/wrangled_data.py --input="raw_data/breast_cancer_raw.csv" --output="clean_data"
 
     # create EDA figures/tables
     Rscript src/visualization.R --train=  --out_dir = results
