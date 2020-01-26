@@ -44,8 +44,8 @@ project:
     # pre-processing/clean data
     python3 src/wrangled_data.py --input="raw_data/breast_cancer_raw.csv" --output="clean_data/breast_cancer_clean.csv"
     
-    # create EDA figures/tables
-    Rscript src/visualization.R --train=  --out_dir = results
+    # create EDA figures/tables    
+    Rscript src/visualization.R --train="data/clean_data/breast_cancer_train.csv"  --out_dir = results
     
     # data analysis
     python3 src/analysis.py --input="clean_data/breast_cancer_clean.csv" --output="results"
