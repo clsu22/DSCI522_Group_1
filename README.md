@@ -44,7 +44,7 @@ line/terminal from the root directory of this project:
     python3 src/wrangled_data.py --input="raw_data/breast_cancer_raw.csv" --output="clean_data"
 
     # create EDA figures/tables
-    Rscript src/visualization.R --train=  --out_dir = results
+    Rscript src/visualization.R --train="data/clean_data/breast_cancer_train.csv" --out_dir="results"
 
     # data analysis
     python3 src/analysis.py --input="clean_data/breast_cancer_clean.csv" --output="results"
