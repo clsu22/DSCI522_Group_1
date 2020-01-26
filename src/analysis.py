@@ -127,9 +127,7 @@ def main(input, output):
     features_df = pd.DataFrame(d).sort_values(by = 'abs(weights)', ascending = False).reset_index(drop = True)
     features_df.to_csv(f'./{output}/features_and_weights.csv', index=False)
 
-    # plot the top four strongest predictors
-    feature_plot = features_df.iloc[:4].plot("features", "abs(weights)")
-    #feature_plot.savefig(f'./{output}/feature_plot.png')
+
     
 if __name__ == "__main__":
     main(input=opt["--input"], output=opt["--output"])
