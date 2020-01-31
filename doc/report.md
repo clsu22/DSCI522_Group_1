@@ -105,7 +105,7 @@ those without breast cancer recurrence. So “larger tumor size” is
 related to breast cancer recurrence
 events.
 
-<img src="../results/data_analysis.png" title="Figure 1. Breast cancer recurrence is related to age and average tumor size in the training data set." alt="Figure 1. Breast cancer recurrence is related to age and average tumor size in the training data set." width="80%" />
+<img src="../results/data_analysis.png" title="Figure 1. Breast cancer recurrence is related to age and average tumor size in the training data set." alt="Figure 1. Breast cancer recurrence is related to age and average tumor size in the training data set." width="100%" />
 
 Known that the data set reflects the relation between breast cancer
 recurrence and age or the tumor size, we then started to look for
