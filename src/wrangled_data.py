@@ -56,7 +56,7 @@ def main(input, output):
     df['Class'] = df['Class'].replace({'no-recurrence-events': 0, 'recurrence-events': 1})
     
     # Save wrangle data to file
-    df.to_csv(f'./data/{output}/breast_cancer_clean1.csv', index=False)
+    df.to_csv(f'./data/{output}/breast_cancer_clean.csv', index=False)
     
     # split training and test data set
     X = df.drop(columns=['Class'])
