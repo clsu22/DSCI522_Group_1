@@ -38,20 +38,13 @@ To replicate the analysis, clone this GitHub repository, install the
 commands at the command line/terminal from the root directory of this
 project:
 
-    # download data
-    python3 src/download_save_data.py --url="https://archive.ics.uci.edu/ml/machine-learning-databases/breast-cancer/breast-cancer.data" --output="data/raw_data/breast_cancer_raw.csv" 
-    
-    # pre-processing/clean data
-    python3 src/wrangled_data.py --input="raw_data/breast_cancer_raw.csv" --output="clean_data/breast_cancer_clean.csv"
-    
-    # create EDA figures/tables    
-    Rscript src/visualization.R --train="data/clean_data/breast_cancer_train.csv"  --out_dir = results
-    
-    # data analysis
-    python3 src/analysis.py --input="clean_data/breast_cancer_clean.csv" --output="results"
-    
-    # render final report
-    Rscript -e "rmarkdown::render('doc/report.Rmd', output_format = 'github_document')"
+    make all
+
+To reset the repo to a clean state, with no intermediate or results
+files, run the following command at the command line/terminal from the
+root directory of this project:
+
+    make clean
 
 ## Dependencies
 
