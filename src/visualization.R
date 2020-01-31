@@ -22,7 +22,7 @@ main <- function(train, out_dir) {
   # load data
   theme_set(theme_cowplot())
   
-  options(repr.plot.height = 8, repr.plot.width = 16)
+  options(repr.plot.height = 10, repr.plot.width = 16)
 
   df <- read_csv(train)
 
@@ -67,7 +67,7 @@ main <- function(train, out_dir) {
 
   # Save figures
   ggsave(plot=plot_grid(p1, p2, labels = c('A', 'B'), label_size = 12, ncol = 1),
-         path = out_dir, "data_analysis.png", width = 10, height = 6, dpi = 300)
+         path = out_dir, "data_analysis.png", width = 10, height = 8, dpi = 300)
 }
 
 main(opt[["--train"]], opt[["--out_dir"]])

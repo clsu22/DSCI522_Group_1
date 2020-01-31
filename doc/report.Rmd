@@ -2,9 +2,7 @@
 title: "Identifying strong predictors of breast cancer recurrence"
 author: "Fanli Zhou"
 date: "2020/1/23 (updated: `r Sys.Date()`)"
-#always_allow_html: true
 output: 
-#  html_document:
   github_document:
     toc: true
 bibliography: breast_cancer_refs.bib
@@ -65,7 +63,7 @@ To understand the relation between breast cancer recurrence events and age, we m
 
 To study the relation between breast cancer recurrence events and the tumor size, we first converted the tumor size range to the corresponding average tumor size and then visualized the average tumor size distribution of patients with or without breast cancer recurrence. From figure 1B, we see that the 0.25 quantile and the mean of the average tumor size of patients with breast cancer recurrence are bigger than those without breast cancer recurrence. So "larger tumor size" is related to breast cancer recurrence events.
 
-```{r figure1, echo=FALSE, fig.cap="Figure 1. Breast cancer recurrence is related to age and average tumor size in the training data set.", out.width = '80%'}
+```{r figure1, echo=FALSE, fig.cap="Figure 1. Breast cancer recurrence is related to age and average tumor size in the training data set.", out.width = '100%'}
 knitr::include_graphics("../results/data_analysis.png")
 ```
 
