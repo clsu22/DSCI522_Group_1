@@ -1,6 +1,6 @@
 # breast cancer data pipe
 
-all: doc/report.md 
+all: doc/report.md doc/report.html 
 
 # download data
 data/raw_data/breast_cancer_raw.csv: src/download_save_data.py
@@ -19,11 +19,11 @@ results/features_and_weights.csv results/scores.csv results/model_info.csv resul
 	python src/analysis.py --input="clean_data/breast_cancer_clean.csv" --output=results
 
 # render report
-doc/report.md: doc/report.Rmd doc/breast_cancer_refs.bib results/model_info.csv results/train_info.csv results/scores.csv results/features_and_weights.csv results/roc_report.png results/data_analysis.png
+doc/report.md doc/report.html: doc/report.Rmd doc/breast_cancer_refs.bib results/model_info.csv results/train_info.csv results/scores.csv results/features_and_weights.csv results/roc_report.png results/data_analysis.png
 	Rscript -e "rmarkdown::render('doc/report.Rmd', output_format = 'github_document')"
 
 clean: 
 	rm -rf data/clean_data/*csv data/raw_data/*csv
 	rm -rf results/*.csv results/*.png
-	rm -rf doc/report.md
+	rm -rf doc/report.md doc/report.html
 			
