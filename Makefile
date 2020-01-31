@@ -1,5 +1,12 @@
-# breast cancer data pipe
+# Driver script
+# Fanli Zhou, Jan. 2020
+# 
+# This driver script completes the analysis of the breast cancer
+# dataset and produces the final report. This script takes no arguments.
+# 
+# usage: make all
 
+# run all analysis
 all: doc/report.md doc/report.html 
 
 # download data
@@ -22,6 +29,7 @@ results/features_and_weights.csv results/scores.csv results/model_info.csv resul
 doc/report.md doc/report.html: doc/report.Rmd doc/breast_cancer_refs.bib results/model_info.csv results/train_info.csv results/scores.csv results/features_and_weights.csv results/roc_report.png results/data_analysis.png
 	Rscript -e "rmarkdown::render('doc/report.Rmd', output_format = 'github_document')"
 
+# Clean up intermediate and results files
 clean: 
 	rm -rf data/clean_data/*csv data/raw_data/*csv
 	rm -rf results/*.csv results/*.png
