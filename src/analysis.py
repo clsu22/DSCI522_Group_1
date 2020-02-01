@@ -38,6 +38,11 @@ def main(input, output):
     # download cleaned data set xls to pandas dataframe
     df = pd.read_csv(f"./data/{input}")
     
+    # Test to check the dimension of the data set
+    assert df.shape == (
+        275,10), "Wrong data set is loaded, check input file"
+    
+    
     # split training and test data set
     X = df.drop(columns=['Class'])
     y = df[['Class']]
@@ -128,6 +133,11 @@ def main(input, output):
     scores_df["dataset"] = ["train", "test"]
     scores_df = scores_df[["dataset", "accuracy", "recall", "precision", "f1_score", "roc_auc_score"]]
     scores_df.to_csv(f'./{output}/scores.csv', index=False)
+    
+    # Test to check the dimension of scores_df
+    assert scores_df.shape == (
+        2,6), "scores_df does not have the right dimension"
+    
     
 if __name__ == "__main__":
     main(input=opt["--input"], output=opt["--output"])
