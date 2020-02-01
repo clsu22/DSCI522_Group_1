@@ -22,7 +22,7 @@ results/data_analysis.png: src/visualization.R data/clean_data/breast_cancer_tra
 	Rscript src/visualization.R --train="data/clean_data/breast_cancer_train.csv"  --out_dir=results
 
 # data analysis
-results/features_and_weights.csv results/scores.csv results/model_info.csv results/roc_report.png: src/analysis.py data/clean_data/breast_cancer_clean.csv
+results/features_and_weights.csv results/scores.csv results/model_info.csv results/roc_report.png: src/analysis.py change_threshold.py data/clean_data/breast_cancer_clean.csv
 	python src/analysis.py --input="clean_data/breast_cancer_clean.csv" --output=results
 
 # render report
