@@ -24,8 +24,9 @@ scores <- scores %>%
   mutate(accuracy = round(accuracy, 2),
          recall = round(recall, 2),
          precision = round(precision, 2),
-         `f1 score` = round(`f1 score`, 2),
-         `auc score` = round(`auc score`, 2))
+         `f1 score` = round(`f1_score`, 2),
+         `auc score` = round(`roc_auc_score`, 2)) %>% 
+  select(-f1_score, -roc_auc_score)
 
 weights <- weights %>% 
   mutate(weights = round(weights, 3),
@@ -50,7 +51,7 @@ The breast cancer data set was obtained from the UCI Machine Learning Repository
 
 ## Analysis
 
-The logistic regression algorithm was used to build a classification model to find out the weights of each feature in the data set. All variables in the original data set were used to fit the model. Features, including the tumor size and ranges of the number of axillary lymph nodes, were converted to the average number and used as numeric variables, while other features were treated as categorical variables. The hyperparameter `C` for logistic regression was chosen with 5-fold cross-validation based on the recall score. The Python programming language [@Python], the R programming language [@R] and the following Python/R packages were used: Pandas [@mckinney-proc-scipy-2010], NumPy [@oliphant2006guide, @walt2011numpy], Altair [@Altair2018], scikit-learn [@pedregosa2011scikit], docopt [@docopt], knitr [@knitr], tidyverse [@tidyverse], cowplot [@cowplot], ggridges [@ggridges]. The code used to perform the analysis and create this report can be found here: https://github.com/UBC-MDS/DSCI_522_Group_301.
+The logistic regression algorithm was used to build a classification model to find out the weights of each feature in the data set. All variables in the original data set were used to fit the model. Features, including the tumor size and ranges of the number of axillary lymph nodes, were converted to the average number and used as numeric variables, while other features were treated as categorical variables. The hyperparameter `C` for logistic regression was chosen with 5-fold cross-validation based on the recall score. The Python programming language [@Python], the R programming language [@R] and the following Python/R packages were used: Pandas [@mckinney-proc-scipy-2010], NumPy [@oliphant2006guide, @walt2011numpy], Altair [@Altair2018], scikit-learn [@pedregosa2011scikit], Matplotlib[@Hunter:2007], docopt [@docopt], knitr [@knitr], tidyverse [@tidyverse], cowplot [@cowplot], ggridges [@ggridges]. The code used to perform the analysis and create this report can be found here: https://github.com/UBC-MDS/DSCI_522_Group_301.
 
 
 # Results and Discussion
@@ -67,7 +68,7 @@ To study the relation between breast cancer recurrence events and the tumor size
 knitr::include_graphics("../results/data_analysis.png")
 ```
 
-Known that the data set reflects the relation between breast cancer recurrence and age or the tumor size, we then started to look for features that are good at predicting breast cancer recurrence. We decided to train a simple logistic regression model to calculate weights for each feature in the training data set. We used 5-fold cross-validation with the recall score to determine the performance of a logistic regression model. We observed that the optimized hyperparameter `C` for logistic regression is `r model$value[1]`.
+Known that the data set reflects the relation between breast cancer recurrence and age or the tumor size, we then started to look for features that are good at predicting breast cancer recurrence. We decided to train a simple logistic regression model to calculate weights for each feature in the training data set. We used 5-fold cross-validation with the recall score to determine the performance of a logistic regression model. We observed that the optimized hyperparameter `C` for logistic regression is `r model$value[1]`. To address the data imbalance problem, we adjuested the threshold of the logistic regression mode primarily based on the recall score, and we observed that the best threshold is `r model$value[2]`.
 
 Table 1 shows feature weights from our best logistic regression model. The top five features with the highest absolute weight values are from the categories of the degree of malignancy, age, and cancer location on the breast quadrants. The degree of malignancy is clearly a strong predictor of breast cancer recurrence, with a degree of 3 strongly (meaning a high absolute weight value) related to "recurrence" and a degree of 1 or 2 strongly related to "no recurrence". The feature, being in the age 60-69 group, has a high positive weight value, but the overall trending of weights as age increases is confusing. Besides, having cancer in the right-up of the breast quadrants is another strong predictor. However, some factors that are known related to breast cancer recurrence, including "younger age, particularly those under age 35" and "larger tumor size" [@cancer2], didn't stand out in this analysis.
 
