@@ -1,7 +1,15 @@
 Identifying strong predictors of breast cancer recurrence
 ================
 Fanli Zhou
-2020/1/23 (updated: 2020-01-30)
+2020/1/23 (updated: 2020-02-01)
+
+  - [Summary](#summary)
+  - [Introduction](#introduction)
+  - [Methods](#methods)
+      - [Data](#data)
+      - [Analysis](#analysis)
+  - [Results and Discussion](#results-and-discussion)
+  - [References](#references)
 
 # Summary
 
@@ -12,7 +20,7 @@ strong predictors of breast cancer recurrence. The other two predictors,
 including being in the age 60-69 group and having cancer in the right-up
 of the breast quadrants, are also among the top five features with the
 highest absolute weight values. Our model didn’t perform well on unseen
-data, with a fair accuracy score of 0.73 and a low recall score of 0.25.
+data, with a fair accuracy score of 0.71 and a low recall score of 0.62.
 The low recall score is likely due to the data imbalance problem noticed
 in the training data set. If time permits, we would like to explore some
 advanced methods to handle the imbalanced data situation and try some
@@ -66,12 +74,12 @@ The hyperparameter `C` for logistic regression was chosen with 5-fold
 cross-validation based on the recall score. The Python programming
 language (Van Rossum and Drake 2009), the R programming language (R Core
 Team 2019) and the following Python/R packages were used: Pandas
-(McKinney 2010), NumPy (Oliphant 2006, @walt2011numpy), Altair
-(VanderPlas et al. 2018), scikit-learn (Pedregosa et al. 2011), docopt
-(de Jonge 2018), knitr (Xie 2014), tidyverse (Wickham 2017), cowplot
-(Wilke 2019), ggridges (Wilke 2018). The code used to perform the
-analysis and create this report can be found here:
-<https://github.com/UBC-MDS/DSCI_522_Group_301>.
+(McKinney 2010), NumPy (Oliphant 2006, 1:@walt2011numpy), Altair
+(VanderPlas et al. 2018), scikit-learn (Pedregosa et al. 2011),
+Matplotlib(Hunter 2007), docopt (de Jonge 2018), knitr (Xie 2014),
+tidyverse (Wickham 2017), cowplot (Wilke 2019), ggridges (Wilke 2018).
+The code used to perform the analysis and create this report can be
+found here: <https://github.com/UBC-MDS/DSCI_522_Group_301>.
 
 # Results and Discussion
 
@@ -102,10 +110,20 @@ distribution of patients with or without breast cancer recurrence. From
 figure 1B, we see that the 0.25 quantile and the mean of the average
 tumor size of patients with breast cancer recurrence are bigger than
 those without breast cancer recurrence. So “larger tumor size” is
-related to breast cancer recurrence
-events.
+related to breast cancer recurrence events.
 
-<img src="../results/data_analysis.png" title="Figure 1. Breast cancer recurrence is related to age and average tumor size in the training data set." alt="Figure 1. Breast cancer recurrence is related to age and average tumor size in the training data set." width="100%" />
+<div class="figure">
+
+<img src="../results/data_analysis.png" alt="Figure 1. Breast cancer recurrence is related to age and average tumor size in the training data set." width="100%" />
+
+<p class="caption">
+
+Figure 1. Breast cancer recurrence is related to age and average tumor
+size in the training data set.
+
+</p>
+
+</div>
 
 Known that the data set reflects the relation between breast cancer
 recurrence and age or the tumor size, we then started to look for
@@ -114,7 +132,10 @@ decided to train a simple logistic regression model to calculate weights
 for each feature in the training data set. We used 5-fold
 cross-validation with the recall score to determine the performance of a
 logistic regression model. We observed that the optimized hyperparameter
-`C` for logistic regression is 1.
+`C` for logistic regression is 1. To address the data imbalance problem,
+we adjuested the threshold of the logistic regression mode primarily
+based on the recall score, and we observed that the best threshold is
+0.22.
 
 Table 1 shows feature weights from our best logistic regression model.
 The top five features with the highest absolute weight values are from
@@ -162,24 +183,32 @@ Table 1. Features and corresponding weights in the logistic regression
 model.
 
 Our model didn’t perform well on either the training or test data set.
-As shown in table 2, the training data set has fair accuracy, precision
-and auc scores, but very low recall and f1 scores. It suggests that we
-didn’t build a good model to predict “recurrence” events even in the
-training data set. Furthermore, the test data set has fair accuracy and
-auc scores, and much lower recall, precision and f1 scores. So it’s
-likely that the model is over-fitted. The ROC report of the test data
-set in figure 2 also shows that our model performed poorly at predicting
-“recurrence” events.
+As shown in table 2, the training data set has a fair recall score, but
+very low precision and f1 scores. It suggests that we didn’t build a
+good model to separate “recurrence” and “no-recurrence” events even in
+the training data set. Furthermore, the test data set has a much lower
+recall score. So it’s likely that the model is over-fitted. The ROC
+report of the test data set in figure 2 also shows that our model
+performed poorly at predicting “recurrence” events.
 
 | dataset | accuracy | recall | precision | f1 score | auc score |
 | :------ | -------: | -----: | --------: | -------: | --------: |
-| train   |     0.78 |   0.43 |      0.72 |     0.54 |      0.78 |
-| test    |     0.73 |   0.25 |      0.57 |     0.35 |      0.72 |
+| train   |     0.66 |   0.77 |      0.46 |     0.57 |      0.69 |
+| test    |     0.71 |   0.62 |      0.50 |     0.56 |      0.68 |
 
-Table 2. Training and test data
-scores.
+Table 2. Training and test data scores.
 
-<img src="../results/roc_report.png" title="Figure 2. ROC curve of the test data set." alt="Figure 2. ROC curve of the test data set." width="50%" />
+<div class="figure">
+
+<img src="../results/roc_report.png" alt="Figure 2. ROC curve of the test data set." width="50%" />
+
+<p class="caption">
+
+Figure 2. ROC curve of the test data set.
+
+</p>
+
+</div>
 
 If time permits, we want to improve our model in two ways. First, we
 need to find a better way to handle data imbalance other than just
@@ -224,6 +253,14 @@ to M. Zwitter; M. Soklic for providing the data.
 
 Halls, Dr. 2019. “Moose & Doc Breast Cancer.” Cross Cancer Institute in
 Edmonton. <https://breast-cancer.ca/chance-cure/>.
+
+</div>
+
+<div id="ref-Hunter:2007">
+
+Hunter, J. D. 2007. “Matplotlib: A 2D Graphics Environment.” *Computing
+in Science & Engineering* 9 (3): 90–95.
+<https://doi.org/10.1109/MCSE.2007.55>.
 
 </div>
 
@@ -272,7 +309,7 @@ VanderPlas, Jacob, Brian Granger, Jeffrey Heer, Dominik Moritz, Kanit
 Wongsuphasawat, Arvind Satyanarayan, Eitan Lees, Ilia Timofeev, Ben
 Welsh, and Scott Sievert. 2018. “Altair: Interactive Statistical
 Visualizations for Python.” *Journal of Open Source Software*, December.
-The Open Journal. <https://doi.org/10.21105/joss.01057>.
+<https://doi.org/10.21105/joss.01057>.
 
 </div>
 
@@ -287,8 +324,7 @@ Scotts Valley, CA: CreateSpace.
 
 Walt, Stéfan van der, S Chris Colbert, and Gael Varoquaux. 2011. “The
 Numpy Array: A Structure for Efficient Numerical Computation.”
-*Computing in Science & Engineering* 13 (2). IEEE Computer Society:
-22–30.
+*Computing in Science & Engineering* 13 (2): 22–30.
 
 </div>
 

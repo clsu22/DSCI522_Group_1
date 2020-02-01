@@ -10,7 +10,7 @@ strong predictors of breast cancer recurrence. The other two predictors,
 including being in the age 60-69 group and having cancer in the right-up
 of the breast quadrants, are also among the top five features with the
 highest absolute weight values. Our model didn’t perform well on unseen
-data, with a fair accuracy score of 0.73 and a low recall score of 0.25.
+data, with a fair accuracy score of 0.71 and a low recall score of 0.62.
 The low recall score is likely due to the data imbalance problem noticed
 in the training data set. If time permits, we would like to explore some
 advanced methods to handle the imbalanced data situation and try some
@@ -54,6 +54,7 @@ root directory of this project:
       - altair==3.3.0
       - sklearn==0.22
       - docopt==0.6.2
+      - matplotlib==3.1.1
   - R 3.6.1 and R packages:
       - knitr==1.27.2
       - tidyverse==1.3.0
