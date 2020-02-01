@@ -57,7 +57,7 @@ def main(input, output):
             ('scale', StandardScaler(), numeric_features),
             ('ohe', OneHotEncoder(), categorical_features)])
 
-    # apply transformations and convert X_train and X_test into dataframe. 
+    # Apply transformations and convert X_train and X_test into dataframe. 
     X_train = pd.DataFrame(preprocessor.fit_transform(X_train),
                           index=X_train.index,
                           columns=(numeric_features +
@@ -67,39 +67,25 @@ def main(input, output):
                           index=X_test.index,
                           columns=X_train.columns)
                           
-    # perform grid-search and cross-validation to find the best hyperparameter. 
+    # Perform grid-search and cross-validation to find the best hyperparameter. 
     param_grid = {'C': [0.00001, 0.0001, 0.001, 0.01, 0.1, 1, 10, 100]}
     lgr = LogisticRegression(solver = 'liblinear')
     model = GridSearchCV(lgr, param_grid, cv=5, scoring='recall')
     model.fit(X_train, y_train.to_numpy().ravel());
-    print("best hyperparameter value: ", model.best_params_)
-    pd.DataFrame({'parameter': ['C'],
-                  'value': [model.best_params_['C']]
-                  }).to_csv(f'./{output}/model_info.csv', index=False)
 
-    # Measure accuracy scores with different metrics
-    predict_train = model.predict(X_train)
-    train_accuracy = accuracy_score(y_train, predict_train)
-    train_recall = recall_score(y_train, predict_train)
-    train_precision = precision_score(y_train, predict_train)
-    train_f1 = f1_score(y_train, predict_train)
-    train_auc_score = roc_auc_score(y_train, model.predict_proba(X_train)[:, 1])
-    predict_test = model.predict(X_test)
-    test_accuracy = accuracy_score(y_test, predict_test)
-    test_recall = recall_score(y_test, predict_test)
-    test_precision = precision_score(y_test, predict_test)
-    test_f1 = f1_score(y_test, predict_test)
-    test_auc_score = roc_auc_score(y_test, model.predict_proba(X_test)[:, 1])
-    scores_df = pd.DataFrame({'dataset': ['train', 'test'],
-                              'accuracy': [train_accuracy, test_accuracy],
-                              'recall': [train_recall, test_recall], 
-                              'precision': [train_precision, test_precision], 
-                              'f1 score': [train_f1, test_f1], 
-                              'auc score': [train_auc_score, test_auc_score]})
-
-    scores_df.to_csv(f'./{output}/scores.csv', index=False)
+    # Training with the best hyperparameter 
+    best = LogisticRegression(solver = 'liblinear', C = 1)
+    best.fit(X_train, y_train.to_numpy().ravel());
+    weights = best.coef_
     
-    # roc curve 
+    # print out a table with the highest weighted feature at the top
+    d = {'features' : list(X_train.columns),
+         'weights': best.coef_.tolist()[0],
+         'abs(weights)': abs(best.coef_).tolist()[0]}
+    features_df = pd.DataFrame(d).sort_values(by = 'abs(weights)', ascending = False).reset_index(drop = True)
+    features_df.to_csv(f'./{output}/features_and_weights.csv', index=False)
+
+    # Plot a roc curve 
     plt.rc('font', size=18)          
     plt.rc('axes', titlesize=16, labelsize=16)    
     plt.rc('xtick', labelsize=16)    
@@ -115,19 +101,29 @@ def main(input, output):
     plt.tight_layout()
     plt.savefig(f'./{output}/roc_report.png')
     
-    # training with the best hyperparameter
-    best = LogisticRegression(solver = 'liblinear', C = 1)
-    best.fit(X_train, y_train.to_numpy().ravel());
-    weights = best.coef_
-    
-    # print out a table with the highest weighted feature at the top
-    d = {'features' : list(X_train.columns),
-         'weights': best.coef_.tolist()[0],
-         'abs(weights)': abs(best.coef_).tolist()[0]}
-    features_df = pd.DataFrame(d).sort_values(by = 'abs(weights)', ascending = False).reset_index(drop = True)
-    features_df.to_csv(f'./{output}/features_and_weights.csv', index=False)
+    # Tune threshold of Logistic regression to pick best threshold
+    # Save scores csv file and plot a line plots
+    from change_threshold import tune_threshold, test_threshold
 
+    threshold_result = tune_threshold(best, X_train, y_train)
+    threshold_result.to_csv(f'./{output}/model_threshold_tuning.csv', index=False)
 
+    threshold_result.plot("threshold")
+    plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0.)
+    plt.ylabel("score")
+    plt.axvline(x=[0.22], color="r", linewidth=1, linestyle="--")
+    plt.text(0.205, 0.73,'threshold=0.22', fontsize=11, color="r", rotation=90)
+    plt.title("Scores in Logistic Regression with different threshold")
+    plt.savefig(f'./{output}/threshold_scores.png', bbox_inches='tight')
+
+    # Print out best C and threshold 
+    pd.DataFrame({'hyperparameter': ['C', 'threshold'],
+                   'value': [model.best_params_['C'], 0.22],
+                   }).to_csv(f'./{output}/model_info.csv', index=False)
+
+    # Apply model with best C and threshold to test dataset and print out scores 
+    scores_df = test_threshold(best, 0.22, X_test, y_test)
+    scores_df.to_csv(f'./{output}/scores.csv', index=False)
     
 if __name__ == "__main__":
     main(input=opt["--input"], output=opt["--output"])

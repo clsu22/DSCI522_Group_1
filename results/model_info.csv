@@ -1,2 +1,3 @@
-parameter,value
-C,1
+hyperparameter,value
+C,1.0
+threshold,0.22
