@@ -53,6 +53,11 @@ def main(input, output):
     # split training and test data set
     X = df.drop(columns=['Class'])
     y = df[['Class']]
+    
+    # test to see that X = 9, as there are nine features (nine columns)
+    assert len(X.columns) == 9
+    # test to see that y = 1, as there is only one column (target)
+    assert len(y.columns) == 1
 
     X_train, X_test, y_train, y_test = train_test_split(X,
                                                         y,
