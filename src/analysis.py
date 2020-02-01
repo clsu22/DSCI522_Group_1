@@ -121,8 +121,12 @@ def main(input, output):
                    'value': [model.best_params_['C'], 0.22],
                    }).to_csv(f'./{output}/model_info.csv', index=False)
 
-    # Apply model with best C and threshold to test dataset and print out scores 
-    scores_df = test_threshold(best, 0.22, X_test, y_test)
+    # Apply model with tuned threshold to test dataset and print out scores 
+    train_score = test_threshold(best, 0.22, X_train, y_train)
+    test_score = test_threshold(best, 0.22, X_test, y_test)
+    scores_df = pd.concat([train_score, test_score], axis=0)
+    scores_df["dataset"] = ["train", "test"]
+    scores_df = scores_df[["dataset", "accuracy", "recall", "precision", "f1_score", "roc_auc_score"]]
     scores_df.to_csv(f'./{output}/scores.csv', index=False)
     
 if __name__ == "__main__":
