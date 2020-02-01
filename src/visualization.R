@@ -19,7 +19,7 @@ library(docopt)
 opt <- docopt(doc)
 
 main <- function(train, out_dir) {
-  # load data
+  # Load data
   theme_set(theme_cowplot())
   
   options(repr.plot.height = 10, repr.plot.width = 16)
@@ -28,6 +28,7 @@ main <- function(train, out_dir) {
 
   data_df <- df %>% 
     mutate(Class = if_else(Class == 0, "No recurrence", "Recurrence"))
+
   
   # Plot class against age 
   p1 <- data_df %>% 
@@ -63,6 +64,9 @@ main <- function(train, out_dir) {
           text = element_text(size = 16),
           plot.title = element_text(face = "plain"))
   
+  try({
+         dir.create(out_dir)
+   })
   
 
   # Save figures
