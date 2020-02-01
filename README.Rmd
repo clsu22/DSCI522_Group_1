@@ -15,10 +15,7 @@ scores <- read_csv("results/scores.csv")
 
 scores <- scores %>% 
   mutate(accuracy = round(accuracy, 2),
-         recall = round(recall, 2),
-         precision = round(precision, 2),
-         `f1 score` = round(`f1 score`, 2),
-         `auc score` = round(`auc score`, 2))
+         recall = round(recall, 2))
 ```
 # Identifying strong predictors of breast cancer recurrence
 
@@ -56,6 +53,7 @@ make clean
     + altair==3.3.0
     + sklearn==0.22
     + docopt==0.6.2
+    + matplotlib==3.1.1
     
 - R 3.6.1 and R packages:
     + knitr==1.27.2 
