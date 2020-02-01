@@ -77,7 +77,7 @@ kable(weights,
       caption = "Table 1. Features and corresponding weights in the logistic regression model.")
 ```
 
-Our model didn't perform well on either the training or test data set. As shown in table 2, the training data set has fair accuracy, precision and auc scores, but very low recall and f1 scores. It suggests that we didn't build a good model to predict "recurrence" events even in the training data set. Furthermore, the test data set has fair accuracy and auc scores, and much lower recall, precision and f1 scores. So it's likely that the model is over-fitted. The ROC report of the test data set in figure 2 also shows that our model performed poorly at predicting "recurrence" events. 
+Our model didn't perform well on either the training or test data set. As shown in table 2, the training data set has a fair recall score, but very low precision and f1 scores. It suggests that we didn't build a good model to separate "recurrence"  and "no-recurrence" events even in the training data set. Furthermore, the test data set has a much lower recall score. So it's likely that the model is over-fitted. The ROC report of the test data set in figure 2 also shows that our model performed poorly at predicting "recurrence" events. 
 
 ```{r scores table}
 kable(scores, 
