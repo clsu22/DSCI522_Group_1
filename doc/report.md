@@ -112,18 +112,10 @@ tumor size of patients with breast cancer recurrence are bigger than
 those without breast cancer recurrence. So “larger tumor size” is
 related to breast cancer recurrence events.
 
-<div class="figure">
-
-<img src="../results/data_analysis.png" alt="Figure 1. Breast cancer recurrence is related to age and average tumor size in the training data set." width="100%" />
-
-<p class="caption">
+<img src="../results/data_analysis.png" width="100%" />
 
 Figure 1. Breast cancer recurrence is related to age and average tumor
 size in the training data set.
-
-</p>
-
-</div>
 
 Known that the data set reflects the relation between breast cancer
 recurrence and age or the tumor size, we then started to look for
@@ -198,17 +190,9 @@ performed poorly at predicting “recurrence” events.
 
 Table 2. Training and test data scores.
 
-<div class="figure">
-
-<img src="../results/roc_report.png" alt="Figure 2. ROC curve of the test data set." width="50%" />
-
-<p class="caption">
+<img src="../results/roc_report.png" width="50%" />
 
 Figure 2. ROC curve of the test data set.
-
-</p>
-
-</div>
 
 If time permits, we want to improve our model in two ways. First, we
 need to find a better way to handle data imbalance other than just
