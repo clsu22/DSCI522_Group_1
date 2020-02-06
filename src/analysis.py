@@ -94,14 +94,19 @@ def main(input, output):
     plt.rc('figure', titlesize=18)
     
     fpr, tpr, thresholds = roc_curve(y_test, model.predict_proba(X_test)[:,1])
+    fig, ax = plt.subplots(nrows=1)
     plt.plot(fpr, tpr);
     plt.title('ROC report')
     plt.plot((0,1),(0,1),'--k');
     plt.xlabel('False positive rate');
     plt.ylabel('True positive rate');
     plt.tight_layout()
+    ax.spines['right'].set_visible(False)
+    ax.spines['top'].set_visible(False)
+    ax.yaxis.set_ticks_position('left')
+    ax.xaxis.set_ticks_position('bottom')
     plt.savefig(f'./{output}/roc_report.png')
-    
+
     # Tune threshold of Logistic regression to pick best threshold
     # Save scores csv file and plot a line plots
     from change_threshold import tune_threshold, test_threshold
