@@ -1,7 +1,15 @@
 Identifying strong predictors of breast cancer recurrence
 ================
 Fanli Zhou
-2020/1/23 (updated: 2020-02-01)
+2020/1/23 (updated: 2020-02-06)
+
+  - [Summary](#summary)
+  - [Introduction](#introduction)
+  - [Methods](#methods)
+      - [Data](#data)
+      - [Analysis](#analysis)
+  - [Results and Discussion](#results-and-discussion)
+  - [References](#references)
 
 # Summary
 
@@ -66,7 +74,7 @@ The hyperparameter `C` for logistic regression was chosen with 5-fold
 cross-validation based on the recall score. The Python programming
 language (Van Rossum and Drake 2009), the R programming language (R Core
 Team 2019) and the following Python/R packages were used: Pandas
-(McKinney 2010), NumPy (Oliphant 2006, @walt2011numpy), Altair
+(McKinney 2010), NumPy (Oliphant 2006, 1:@walt2011numpy), Altair
 (VanderPlas et al. 2018), scikit-learn (Pedregosa et al. 2011),
 Matplotlib(Hunter 2007), docopt (de Jonge 2018), knitr (Xie 2014),
 tidyverse (Wickham 2017), cowplot (Wilke 2019), ggridges (Wilke 2018).
@@ -102,10 +110,12 @@ distribution of patients with or without breast cancer recurrence. From
 figure 1B, we see that the 0.25 quantile and the mean of the average
 tumor size of patients with breast cancer recurrence are bigger than
 those without breast cancer recurrence. So “larger tumor size” is
-related to breast cancer recurrence
-events.
+related to breast cancer recurrence events.
 
-<img src="../results/data_analysis.png" title="Figure 1. Breast cancer recurrence is related to age and average tumor size in the training data set." alt="Figure 1. Breast cancer recurrence is related to age and average tumor size in the training data set." width="100%" />
+<img src="../results/data_analysis.png" width="100%" />
+
+Figure 1. Breast cancer recurrence is related to age and average tumor
+size in the training data set.
 
 Known that the data set reflects the relation between breast cancer
 recurrence and age or the tumor size, we then started to look for
@@ -133,33 +143,33 @@ predictor. However, some factors that are known related to breast cancer
 recurrence, including “younger age, particularly those under age 35” and
 “larger tumor size” (Staff 2018), didn’t stand out in this analysis.
 
-| features                 | weights | abs(weights) |
-| :----------------------- | ------: | -----------: |
-| deg\_malig\_3            |   0.858 |        0.858 |
-| deg\_malig\_2            | \-0.621 |        0.621 |
-| age\_60-69               |   0.514 |        0.514 |
-| deg\_malig\_1            | \-0.495 |        0.495 |
-| breast\_quad\_right\_up  |   0.463 |        0.463 |
-| irradiat\_no             | \-0.437 |        0.437 |
-| menopause\_premeno       |   0.425 |        0.425 |
-| age\_70-79               | \-0.415 |        0.415 |
-| menopause\_ge40          | \-0.383 |        0.383 |
-| breast\_quad\_left\_up   | \-0.334 |        0.334 |
-| avg\_inv\_nodes          |   0.303 |        0.303 |
-| menopause\_lt40          | \-0.299 |        0.299 |
-| node\_caps\_no           | \-0.295 |        0.295 |
-| breast\_right            | \-0.291 |        0.291 |
-| age\_20-29               | \-0.220 |        0.220 |
-| irradiat\_yes            |   0.179 |        0.179 |
-| breast\_quad\_central    | \-0.177 |        0.177 |
-| avg\_tumor\_size         |   0.124 |        0.124 |
-| breast\_quad\_left\_low  | \-0.117 |        0.117 |
-| age\_50-59               | \-0.112 |        0.112 |
-| breast\_quad\_right\_low | \-0.092 |        0.092 |
-| age\_40-49               | \-0.042 |        0.042 |
-| node\_caps\_yes          |   0.037 |        0.037 |
-| breast\_left             |   0.034 |        0.034 |
-| age\_30-39               |   0.018 |        0.018 |
+| features                                   | weights | abs(weights) |
+| :----------------------------------------- | ------: | -----------: |
+| malignancy\_degree\_3                      |    0.86 |         0.86 |
+| malignancy\_degree\_2                      |  \-0.62 |         0.62 |
+| age\_group\_60-69                          |    0.51 |         0.51 |
+| malignancy\_degree\_1                      |  \-0.49 |         0.49 |
+| position\_on\_breast\_quadrant\_right\_up  |    0.46 |         0.46 |
+| radiation\_therapy\_no                     |  \-0.44 |         0.44 |
+| menopause\_age\_premenopause               |    0.42 |         0.42 |
+| age\_group\_70-79                          |  \-0.42 |         0.42 |
+| menopause\_age\_great\_than\_40            |  \-0.38 |         0.38 |
+| position\_on\_breast\_quadrant\_left\_up   |  \-0.33 |         0.33 |
+| avgerage\_axillary\_lymph\_nodes           |    0.30 |         0.30 |
+| menopause\_age\_less\_than\_40             |  \-0.30 |         0.30 |
+| cap\_node\_presence\_no                    |  \-0.29 |         0.29 |
+| position\_on\_breast\_right                |  \-0.29 |         0.29 |
+| age\_group\_20-29                          |  \-0.22 |         0.22 |
+| radiation\_therapy\_yes                    |    0.18 |         0.18 |
+| position\_on\_breast\_quadrant\_central    |  \-0.18 |         0.18 |
+| avgerage\_tumor\_size                      |    0.12 |         0.12 |
+| position\_on\_breast\_quadrant\_left\_low  |  \-0.12 |         0.12 |
+| age\_group\_50-59                          |  \-0.11 |         0.11 |
+| position\_on\_breast\_quadrant\_right\_low |  \-0.09 |         0.09 |
+| age\_group\_40-49                          |  \-0.04 |         0.04 |
+| cap\_node\_presence\_yes                   |    0.04 |         0.04 |
+| position\_on\_breast\_left                 |    0.03 |         0.03 |
+| age\_group\_30-39                          |    0.02 |         0.02 |
 
 Table 1. Features and corresponding weights in the logistic regression
 model.
@@ -178,10 +188,11 @@ performed poorly at predicting “recurrence” events.
 | train   |     0.66 |   0.77 |      0.46 |     0.57 |      0.69 |
 | test    |     0.71 |   0.62 |      0.50 |     0.56 |      0.68 |
 
-Table 2. Training and test data
-scores.
+Table 2. Training and test data scores.
 
-<img src="../results/roc_report.png" title="Figure 2. ROC curve of the test data set." alt="Figure 2. ROC curve of the test data set." width="50%" />
+<img src="../results/roc_report.png" width="50%" />
+
+Figure 2. ROC curve of the test data set.
 
 If time permits, we want to improve our model in two ways. First, we
 need to find a better way to handle data imbalance other than just
@@ -232,7 +243,7 @@ Edmonton. <https://breast-cancer.ca/chance-cure/>.
 <div id="ref-Hunter:2007">
 
 Hunter, J. D. 2007. “Matplotlib: A 2D Graphics Environment.” *Computing
-in Science & Engineering* 9 (3). IEEE COMPUTER SOC: 90–95.
+in Science & Engineering* 9 (3): 90–95.
 <https://doi.org/10.1109/MCSE.2007.55>.
 
 </div>
@@ -282,7 +293,7 @@ VanderPlas, Jacob, Brian Granger, Jeffrey Heer, Dominik Moritz, Kanit
 Wongsuphasawat, Arvind Satyanarayan, Eitan Lees, Ilia Timofeev, Ben
 Welsh, and Scott Sievert. 2018. “Altair: Interactive Statistical
 Visualizations for Python.” *Journal of Open Source Software*, December.
-The Open Journal. <https://doi.org/10.21105/joss.01057>.
+<https://doi.org/10.21105/joss.01057>.
 
 </div>
 
@@ -297,8 +308,7 @@ Scotts Valley, CA: CreateSpace.
 
 Walt, Stéfan van der, S Chris Colbert, and Gael Varoquaux. 2011. “The
 Numpy Array: A Structure for Efficient Numerical Computation.”
-*Computing in Science & Engineering* 13 (2). IEEE Computer Society:
-22–30.
+*Computing in Science & Engineering* 13 (2): 22–30.
 
 </div>
 

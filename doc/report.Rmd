@@ -29,8 +29,8 @@ scores <- scores %>%
   select(-f1_score, -roc_auc_score)
 
 weights <- weights %>% 
-  mutate(weights = round(weights, 3),
-         `abs(weights)` = round(`abs(weights)`, 3))
+  mutate(weights = round(weights, 2),
+         `abs(weights)` = round(`abs(weights)`, 2))
 ```
 
 # Summary
@@ -64,9 +64,11 @@ To understand the relation between breast cancer recurrence events and age, we m
 
 To study the relation between breast cancer recurrence events and the tumor size, we first converted the tumor size range to the corresponding average tumor size and then visualized the average tumor size distribution of patients with or without breast cancer recurrence. From figure 1B, we see that the 0.25 quantile and the mean of the average tumor size of patients with breast cancer recurrence are bigger than those without breast cancer recurrence. So "larger tumor size" is related to breast cancer recurrence events.
 
-```{r figure1, echo=FALSE, fig.cap="Figure 1. Breast cancer recurrence is related to age and average tumor size in the training data set.", out.width = '100%'}
+```{r figure1, echo=FALSE, out.width = '100%'}
 knitr::include_graphics("../results/data_analysis.png")
 ```
+
+Figure 1. Breast cancer recurrence is related to age and average tumor size in the training data set.
 
 Known that the data set reflects the relation between breast cancer recurrence and age or the tumor size, we then started to look for features that are good at predicting breast cancer recurrence. We decided to train a simple logistic regression model to calculate weights for each feature in the training data set. We used 5-fold cross-validation with the recall score to determine the performance of a logistic regression model. We observed that the optimized hyperparameter `C` for logistic regression is `r model$value[1]`. To address the data imbalance problem, we adjuested the threshold of the logistic regression mode primarily based on the recall score, and we observed that the best threshold is `r model$value[2]`.
 
@@ -84,9 +86,11 @@ kable(scores,
       caption = "Table 2. Training and test data scores.")
 ```
 
-```{r figure2, echo=FALSE, fig.cap="Figure 2. ROC curve of the test data set.", out.width = '50%'}
+```{r figure2, echo=FALSE, out.width = '50%'}
 knitr::include_graphics("../results/roc_report.png")
 ```
+
+Figure 2. ROC curve of the test data set.
 
 If time permits, we want to improve our model in two ways. First, we need to find a better way to handle data imbalance other than just ajusting the scoring method. With an advanced approach to deal with the data imbalance problem, we expect to see a big improvement in the recall, precision, and f1 scores for both training and test data. Second, we want to explore other feature selection methods to help us decide which predictors are better over others. We also need some advice and experience in handling categorical variables during feature selection.
 
