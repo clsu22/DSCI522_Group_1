@@ -29,8 +29,8 @@ scores <- scores %>%
   select(-f1_score, -roc_auc_score)
 
 weights <- weights %>% 
-  mutate(weights = round(weights, 3),
-         `abs(weights)` = round(`abs(weights)`, 3))
+  mutate(weights = round(weights, 2),
+         `abs(weights)` = round(`abs(weights)`, 2))
 ```
 
 # Summary
