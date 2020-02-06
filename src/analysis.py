@@ -38,11 +38,6 @@ def main(input, output):
     # download cleaned data set xls to pandas dataframe
     df = pd.read_csv(f"./data/{input}")
     
-    # Test to check the dimension of the data set
-    assert df.shape == (
-        275,10), "Wrong data set is loaded, check input file"
-    
-    
     # split training and test data set
     X = df.drop(columns=['Class'])
     y = df[['Class']]
@@ -52,32 +47,33 @@ def main(input, output):
                                                         random_state=888)
     
     # separate the features into numerical and categrocial columns.
-    categorical_features = ['age', 'menopause', 'node_caps', 
-                            'deg_malig', 'breast', 'breast_quad', 'irradiat']
-    numeric_features = ['avg_tumor_size', 'avg_inv_nodes']
-
+    categorical_features = ['age_group', 'menopause_age', 'cap_node_presence', 
+                            'malignancy_degree', 'position_on_breast', 
+                            'position_on_breast_quadrant', 'radiation_therapy']
+    numeric_features = ['avgerage_tumor_size', 'avgerage_axillary_lymph_nodes']
+    
     # Scale the features according the type of features/create transformer 
     preprocessor = ColumnTransformer(
-        transformers=[
-            ('scale', StandardScaler(), numeric_features),
-            ('ohe', OneHotEncoder(), categorical_features)])
-
+      transformers=[
+        ('scale', StandardScaler(), numeric_features),
+        ('ohe', OneHotEncoder(), categorical_features)])
+    
     # Apply transformations and convert X_train and X_test into dataframe. 
     X_train = pd.DataFrame(preprocessor.fit_transform(X_train),
-                          index=X_train.index,
-                          columns=(numeric_features +
-                                    list(preprocessor.named_transformers_['ohe']
-                                        .get_feature_names(categorical_features))))
+                           index=X_train.index,
+                           columns=(numeric_features +
+                                      list(preprocessor.named_transformers_['ohe']
+                                           .get_feature_names(categorical_features))))
     X_test = pd.DataFrame(preprocessor.transform(X_test),
                           index=X_test.index,
                           columns=X_train.columns)
-                          
+    
     # Perform grid-search and cross-validation to find the best hyperparameter. 
     param_grid = {'C': [0.00001, 0.0001, 0.001, 0.01, 0.1, 1, 10, 100]}
     lgr = LogisticRegression(solver = 'liblinear')
     model = GridSearchCV(lgr, param_grid, cv=5, scoring='recall')
     model.fit(X_train, y_train.to_numpy().ravel());
-
+    
     # Training with the best hyperparameter 
     best = LogisticRegression(solver = 'liblinear', C = 1)
     best.fit(X_train, y_train.to_numpy().ravel());
@@ -85,18 +81,18 @@ def main(input, output):
     
     # print out a table with the highest weighted feature at the top
     d = {'features' : list(X_train.columns),
-         'weights': best.coef_.tolist()[0],
-         'abs(weights)': abs(best.coef_).tolist()[0]}
+      'weights': best.coef_.tolist()[0],
+      'abs(weights)': abs(best.coef_).tolist()[0]}
     features_df = pd.DataFrame(d).sort_values(by = 'abs(weights)', ascending = False).reset_index(drop = True)
     features_df.to_csv(f'./{output}/features_and_weights.csv', index=False)
-
+    
     # Plot a roc curve 
     plt.rc('font', size=18)          
     plt.rc('axes', titlesize=16, labelsize=16)    
     plt.rc('xtick', labelsize=16)    
     plt.rc('ytick', labelsize=16)    
     plt.rc('figure', titlesize=18)
-
+    
     fpr, tpr, thresholds = roc_curve(y_test, model.predict_proba(X_test)[:,1])
     plt.plot(fpr, tpr);
     plt.title('ROC report')
@@ -109,10 +105,10 @@ def main(input, output):
     # Tune threshold of Logistic regression to pick best threshold
     # Save scores csv file and plot a line plots
     from change_threshold import tune_threshold, test_threshold
-
+    
     threshold_result = tune_threshold(best, X_train, y_train)
     threshold_result.to_csv(f'./{output}/model_threshold_tuning.csv', index=False)
-
+    
     threshold_result.plot("threshold")
     plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0.)
     plt.ylabel("score")
@@ -120,12 +116,12 @@ def main(input, output):
     plt.text(0.205, 0.73,'threshold=0.22', fontsize=11, color="r", rotation=90)
     plt.title("Scores in Logistic Regression with different threshold")
     plt.savefig(f'./{output}/threshold_scores.png', bbox_inches='tight')
-
+    
     # Print out best C and threshold 
     pd.DataFrame({'hyperparameter': ['C', 'threshold'],
-                   'value': [model.best_params_['C'], 0.22],
-                   }).to_csv(f'./{output}/model_info.csv', index=False)
-
+      'value': [model.best_params_['C'], 0.22],
+    }).to_csv(f'./{output}/model_info.csv', index=False)
+    
     # Apply model with tuned threshold to test dataset and print out scores 
     train_score = test_threshold(best, 0.22, X_train, y_train)
     test_score = test_threshold(best, 0.22, X_test, y_test)
@@ -134,19 +130,14 @@ def main(input, output):
     scores_df = scores_df[["dataset", "accuracy", "recall", "precision", "f1_score", "roc_auc_score"]]
     scores_df.to_csv(f'./{output}/scores.csv', index=False)
     
-    # Test to check the dimension of scores_df
-    assert scores_df.shape == (
-        2,6), "scores_df does not have the right dimension"
-    
-    
 if __name__ == "__main__":
-    main(input=opt["--input"], output=opt["--output"])
-    
-    
-    
-    
-    
-    
+  main(input=opt["--input"], output=opt["--output"])
+
+
+
+
+
+
 
 
 
