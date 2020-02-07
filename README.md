@@ -48,6 +48,10 @@ root directory of this project:
 
     make clean
 
+## Dependency diagram
+
+<img src="./img/Makefile.png" width="100%" />
+
 ## Dependencies
 
   - Python 3.7.4 and Python packages:
