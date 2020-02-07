@@ -14,14 +14,12 @@ RUN apt-get update && \
 
 # Install R Packages
 RUN Rscript -e "install.packages('testthat')" 
-RUN Rscript -e "install.packages('docopt')"
-RUN Rscript -e "install.packages('knitr')"
-RUN Rscript -e "install.packages('dplyr')"
-RUN Rscript -e "install.packages('readr')"
-RUN Rscript -e "install.packages('ggplot2')"
 RUN Rscript -e "install.packages('cowplot')"
 RUN Rscript -e "install.packages('ggridges')"
-
+RUN Rscript -e "install.packages('tidyverse')"
+RUN Rscript -e "install.packages('knitr')"
+RUN Rscript -e "install.packages('docopt')"
+RUN Rscript -e "install.packages('ggplot2')"
 
 # install python packages   
 RUN conda install requests 
