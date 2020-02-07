@@ -18,6 +18,7 @@ from sklearn.metrics import classification_report, confusion_matrix
 from sklearn.metrics import recall_score, precision_score
 from sklearn.metrics import roc_auc_score, roc_curve
 
+import matplotlib.pyplot as plt
 from docopt import docopt
 
 def tune_threshold(model, X_train, y_train):
