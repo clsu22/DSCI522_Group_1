@@ -35,6 +35,28 @@ The final report can be found
 
 ## Usage
 
+There are two suggested ways to run this analysis:
+
+#### 1\. Using Docker
+
+*note - the instructions in this section also depends on running this in
+a unix shell (e.g., terminal or Git Bash)*
+
+To replicate the analysis, install
+[Docker](https://www.docker.com/get-started). Then clone this GitHub
+repository and run the following command at the command line/terminal
+from the root directory of this project:
+
+    docker run --rm -v /$(pwd):/home/breast_cancer_recurrence_predictor make -C /home/breast_cancer_recurrence_predictor all
+
+To reset the repo to a clean state, with no intermediate or results
+files, run the following command at the command line/terminal from the
+root directory of this project:
+
+    docker run --rm -v /$(pwd):/home/breast_cancer_recurrence_predictor make -C /home/breast_cancer_recurrence_predictor clean
+
+#### 2\. Without using Docker
+
 To replicate the analysis, clone this GitHub repository, install the
 [dependencies](#dependencies) listed below, and run the following
 commands at the command line/terminal from the root directory of this
@@ -48,18 +70,23 @@ root directory of this project:
 
     make clean
 
+## Dependency diagram
+
+<img src="./img/Makefile.png" width="100%" />
+
 ## Dependencies
 
   - Python 3.7.4 and Python packages:
       - pandas==0.25.2
       - numpy==1.17.2
-      - altair==3.3.0
       - sklearn==0.22
       - docopt==0.6.2
       - matplotlib==3.1.1
   - R 3.6.1 and R packages:
       - knitr==1.27.2
-      - tidyverse==1.3.0
+      - ggplot2==3.2.1
+      - readr==1.3.1  
+      - dplyr==0.8.3
       - ggridges==0.5.1
       - cowplot==1.0.0
 

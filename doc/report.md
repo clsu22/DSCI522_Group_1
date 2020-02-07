@@ -66,12 +66,12 @@ The hyperparameter `C` for logistic regression was chosen with 5-fold
 cross-validation based on the recall score. The Python programming
 language (Van Rossum and Drake 2009), the R programming language (R Core
 Team 2019) and the following Python/R packages were used: Pandas
-(McKinney 2010), NumPy (Oliphant 2006, @walt2011numpy), Altair
-(VanderPlas et al. 2018), scikit-learn (Pedregosa et al. 2011),
-Matplotlib(Hunter 2007), docopt (de Jonge 2018), knitr (Xie 2014),
-tidyverse (Wickham 2017), cowplot (Wilke 2019), ggridges (Wilke 2018).
-The code used to perform the analysis and create this report can be
-found here: <https://github.com/UBC-MDS/DSCI_522_Group_301>.
+(McKinney 2010), NumPy (Oliphant 2006, 1:@walt2011numpy), scikit-learn
+(Pedregosa et al. 2011), Matplotlib(Hunter 2007), docopt (de Jonge
+2018), knitr (Xie 2014), tidyverse (Wickham 2017), cowplot (Wilke 2019),
+ggridges (Wilke 2018). The code used to perform the analysis and create
+this report can be found here:
+<https://github.com/UBC-MDS/DSCI_522_Group_301>.
 
 # Results and Discussion
 
@@ -276,16 +276,6 @@ Computing*. Vienna, Austria: R Foundation for Statistical Computing.
 
 Staff, Mayo Clinic. 2018. “Recurrent Breast Cancer.” Mayo Clinic.
 <https://www.mayoclinic.org/diseases-conditions/recurrent-breast-cancer/symptoms-causes/syc-20377135>.
-
-</div>
-
-<div id="ref-Altair2018">
-
-VanderPlas, Jacob, Brian Granger, Jeffrey Heer, Dominik Moritz, Kanit
-Wongsuphasawat, Arvind Satyanarayan, Eitan Lees, Ilia Timofeev, Ben
-Welsh, and Scott Sievert. 2018. “Altair: Interactive Statistical
-Visualizations for Python.” *Journal of Open Source Software*, December.
-The Open Journal. <https://doi.org/10.21105/joss.01057>.
 
 </div>
 

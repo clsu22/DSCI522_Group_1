@@ -11,7 +11,9 @@ Options:
 --out_dir=<out_dir>  Path to directory where the figures will be saved.
 " -> doc
 
-library(tidyverse)
+library(dplyr)
+library(readr)
+library(ggplot2)
 library(cowplot)
 library(ggridges) 
 library(docopt)
