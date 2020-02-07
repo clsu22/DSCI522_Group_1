@@ -3,14 +3,6 @@ Identifying strong predictors of breast cancer recurrence
 Fanli Zhou
 2020/1/23 (updated: 2020-02-06)
 
-  - [Summary](#summary)
-  - [Introduction](#introduction)
-  - [Methods](#methods)
-      - [Data](#data)
-      - [Analysis](#analysis)
-  - [Results and Discussion](#results-and-discussion)
-  - [References](#references)
-
 # Summary
 
 We explored to use a logistic regression model to identify strong
@@ -243,7 +235,7 @@ Edmonton. <https://breast-cancer.ca/chance-cure/>.
 <div id="ref-Hunter:2007">
 
 Hunter, J. D. 2007. “Matplotlib: A 2D Graphics Environment.” *Computing
-in Science & Engineering* 9 (3): 90–95.
+in Science & Engineering* 9 (3). IEEE COMPUTER SOC: 90–95.
 <https://doi.org/10.1109/MCSE.2007.55>.
 
 </div>
@@ -298,7 +290,8 @@ Scotts Valley, CA: CreateSpace.
 
 Walt, Stéfan van der, S Chris Colbert, and Gael Varoquaux. 2011. “The
 Numpy Array: A Structure for Efficient Numerical Computation.”
-*Computing in Science & Engineering* 13 (2): 22–30.
+*Computing in Science & Engineering* 13 (2). IEEE Computer Society:
+22–30.
 
 </div>
 
