@@ -21,7 +21,7 @@ scores <- scores %>%
 # Identifying strong predictors of breast cancer recurrence
 
 Group Members: 
-Haoyu(Clara) Su, Fanli Zhou, Ke Xin(Margaret) Zhao
+Haoyu Su, Fanli Zhou, Ke Xin(Margaret) Zhao
 
 
 We explored to use a logistic regression model to identify strong predictors of breast cancer recurrence. Based on the feature weights assigned in the model, we found that degrees of malignancy are very strong predictors of breast cancer recurrence. The other two predictors, including being in the age 60-69 group and having cancer in the right-up of the breast quadrants, are also among the top five features with the highest absolute weight values. Our model didn't perform well on unseen data, with a fair accuracy score of `r scores$accuracy[2]` and a low recall score of `r scores$recall[2]`. The low recall score is likely due to the data imbalance problem noticed in the training data set. If time permits, we would like to explore some advanced methods to handle the imbalanced data situation and try some advanced feature selection methods to build a better model.
@@ -42,13 +42,13 @@ There are two suggested ways to run this analysis:
 To replicate the analysis, install [Docker](https://www.docker.com/get-started). Then clone this GitHub repository and run the following command at the command line/terminal from the root directory of this project:
 
 ```
-docker run --rm -v /$(pwd):/home/breast_cancer_recurrence_predictor make -C /home/breast_cancer_recurrence_predictor all
+docker run --rm -v $(pwd):/home/DSCI_522_Group_301 clsu123/dsci-522-group-301 make -C '/home/DSCI_522_Group_301' all
 ```
 
 To reset the repo to a clean state, with no intermediate or results files, run the following command at the command line/terminal from the root directory of this project:
 
 ```
-docker run --rm -v /$(pwd):/home/breast_cancer_recurrence_predictor make -C /home/breast_cancer_recurrence_predictor clean
+docker run --rm -v $(pwd):/home/DSCI_522_Group_301 clsu123/dsci-522-group-301 make -C '/home/DSCI_522_Group_301' clean
 ```
 
 #### 2. Without using Docker

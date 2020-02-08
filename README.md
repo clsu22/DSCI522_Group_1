@@ -47,13 +47,13 @@ To replicate the analysis, install
 repository and run the following command at the command line/terminal
 from the root directory of this project:
 
-    docker run --rm -v /$(pwd):/home/breast_cancer_recurrence_predictor make -C /home/breast_cancer_recurrence_predictor all
+    docker run --rm -v $(pwd):/home/DSCI_522_Group_301 clsu123/dsci-522-group-301 make -C '/home/DSCI_522_Group_301' all
 
 To reset the repo to a clean state, with no intermediate or results
 files, run the following command at the command line/terminal from the
 root directory of this project:
 
-    docker run --rm -v /$(pwd):/home/breast_cancer_recurrence_predictor make -C /home/breast_cancer_recurrence_predictor clean
+    docker run --rm -v $(pwd):/home/DSCI_522_Group_301 clsu123/dsci-522-group-301 make -C '/home/DSCI_522_Group_301' clean
 
 #### 2\. Without using Docker
 
