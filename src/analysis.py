@@ -1,4 +1,4 @@
-# author: Margaret Zhao
+# author: Margaret Zhao, Haoyu Su, Fanli Zhou 
 # date: 2020-01-23
 
 '''This script fits a model and outputs several images and csv reports
