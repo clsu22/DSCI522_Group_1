@@ -1,6 +1,6 @@
 ---
 title: "Identifying strong predictors of breast cancer recurrence"
-author: "Fanli Zhou"
+author: "Fanli Zhou", "Haoyu Su", "Margrate Zhao"
 date: "2020/1/23 (updated: `r Sys.Date()`)"
 output: 
   github_document:
