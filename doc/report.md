@@ -1,6 +1,6 @@
 Identifying strong predictors of breast cancer recurrence
 ================
-Fanli Zhou
+Fanli Zhou, Haoyu Su, Margrate Zhao 
 2020/1/23 (updated: 2020-02-06)
 
 # Summary
